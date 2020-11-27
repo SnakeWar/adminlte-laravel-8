@@ -1,6 +1,4 @@
 @extends('adminlte::page')
-@section('title_prefix', 'Admin - ')
-@section('title', $title)
 @section('dropify')
     <link rel="stylesheet" href="{{asset('dropify/css/dropify.css')}}">
     <link rel="stylesheet" href="{{asset('dropify/fonts/dropify.ttf')}}">

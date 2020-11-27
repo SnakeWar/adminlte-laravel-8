@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title_prefix', '')
+@section('title_prefix', 'Admin - ')
 @section('title', $title)
 @section('content')
     <h1>{{$title}}</h1>
@@ -9,8 +9,8 @@
     <a href="{{route('admin.posts.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> Nova Postagem</a>
     {{$posts}}
     @if($posts)
-    <div class="container-fluid card">
-        <table class="table table-striped">
+    <div class="container-fluid">
+        <table class="table table-bordered table-striped data-table">
             <thead>
             <th>#</th>
             <th>Título</th>

@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => '',
-    'title_prefix' => 'Admin -',
+    'title' => 'Admin',
+    'title_prefix' => '',
     'title_postfix' => '',
 
     /*
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin </b>LTE',
+    'logo' => '<b>Admin</b>LTE',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -214,7 +214,7 @@ return [
     |
     */
 
-    'enabled_laravel_mix' => true,
+    'enabled_laravel_mix' => false,
     'laravel_mix_css_path' => 'css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
 
@@ -233,60 +233,90 @@ return [
     'menu' => [
 //        [
 //            'text' => 'search',
-//            'search' => false,
+//            'search' => true,
 //            'topnav' => true,
 //        ],
         [
             'text' => 'Postagem',
             'url'  => 'admin/posts',
-            'icon'        => 'fa fa-fw fa-desktop',
             'can'  => 'read_posts',
         ],
         [
-            'text' => 'Categorias',
-            'url'  => 'admin/categories',
-            'icon'        => 'fa fa-fw fa-book',
+            'text'        => 'Categorias',
+            'url'         => 'admin/categories',
+            'icon'        => 'far fa-fw fa-file',
             'can'  => 'read_categories',
+//            'label'       => 4,
+  //          'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
         [
-            'text'        => 'Grupos',
-            'url'         => 'admin/roles',
-            'icon'        => 'fas fa-fw fa-child',
-            'can'  => 'read_roles',
-            //'label'       => 4,
-//            'label_color' => 'success',
-            //'active' => ['pages', 'content', 'content*', 'regex:@^content/[0-9]+$@']
-        ],
-        [
             'text' => 'Usuários',
             'url'  => 'admin/users',
-            'icon' => 'fas fa-fw  fa-user',
+            'icon' => 'fas fa-fw fa-user',
             'can'  => 'read_users',
         ],
         [
             'text' => 'Módulos',
             'url'  => 'admin/modules',
-            'icon' => 'fas fa-fw fa-folder',
+            'icon' => 'fas fa-fw fa-lock',
             'can'  => 'read_modules',
-        ]
-//        [
-//            'text'    => 'multilevel',
-//            'icon'    => 'fas fa-fw fa-share',
+        ],
+        [
+            'text'    => 'Grupos',
+            'url'  => 'admin/roles',
+            'icon'    => 'fas fa-fw fa-share',
+            'can'  => 'read_roles',
 //            'submenu' => [
 //                [
 //                    'text' => 'level_one',
 //                    'url'  => '#',
 //                ],
 //                [
-//                    'text' => 'level_one',
-//                    'url'  => '#',
+//                    'text'    => 'level_one',
+//                    'url'     => '#',
+//                    'submenu' => [
+//                        [
+//                            'text' => 'level_two',
+//                            'url'  => '#',
+//                        ],
+//                        [
+//                            'text'    => 'level_two',
+//                            'url'     => '#',
+//                            'submenu' => [
+//                                [
+//                                    'text' => 'level_three',
+//                                    'url'  => '#',
+//                                ],
+//                                [
+//                                    'text' => 'level_three',
+//                                    'url'  => '#',
+//                                ],
+//                            ],
+//                        ],
+//                    ],
 //                ],
 //                [
 //                    'text' => 'level_one',
 //                    'url'  => '#',
 //                ],
 //            ],
+        ],
+//        ['header' => 'labels'],
+//        [
+//            'text'       => 'important',
+//            'icon_color' => 'red',
+//            'url'        => '#',
+//        ],
+//        [
+//            'text'       => 'warning',
+//            'icon_color' => 'yellow',
+//            'url'        => '#',
+//        ],
+//        [
+//            'text'       => 'information',
+//            'icon_color' => 'cyan',
+//            'url'        => '#',
 //        ],
     ],
 
@@ -326,21 +356,21 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+@section('title_prefix', 'Admin - ')
 @section('title', $title)
 @section('content')
 
@@ -8,8 +8,8 @@
     <hr>
     @include('flash::message')
             <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> Adicionar</a>
-            <div class="container-fluid card">
-                <table class="table table-striped">
+            <div class="container-fluid">
+                <table class="table table-bordered table-striped data-table">
                     <thead>
                     <tr>
                         <th>#</th>

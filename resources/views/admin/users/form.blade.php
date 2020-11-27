@@ -1,6 +1,6 @@
 @extends('adminlte::page')
-
-
+@section('title_prefix', 'Admin - ')
+@section('title', $title)
 @section('content')
         <div class="container-fluid card">
             <h1>{{$title}}</h1>

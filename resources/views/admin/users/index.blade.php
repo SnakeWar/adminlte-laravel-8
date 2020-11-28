@@ -31,8 +31,8 @@
                             </td>
                             <td class="action">
                                 <div class="btn-group">
-                                    <a href="{{route('admin.roles.edit', [$role->id])}}" class="btn btn-sm btn-primary"><i style="color: white" class="fa fa-pencil-alt"></i></a>
-                                    <form action="{{route('admin.roles.destroy', [$role->id])}}" method="post">
+                                    <a href="{{route('admin.users.edit', [$role->id])}}" class="btn btn-sm btn-primary"><i style="color: white" class="fa fa-pencil-alt"></i></a>
+                                    <form action="{{route('admin.users.destroy', [$role->id])}}" method="post">
                                         @csrf
                                         @method("DELETE")
                                         <button type="submit" class="btn btn-sm btn-danger" style="border-bottom-left-radius: 0;border-top-left-radius: 0"><i class="fa fa-trash"></i></button>

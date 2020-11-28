@@ -12,7 +12,7 @@
             <h3 class="box-title">{{ $subtitle }}</h3>
         <hr>
         <form role="form" method="POST" action="{{ isset($module) ? route('admin.modules.update', $module->id) : route('admin.modules.store')}}" enctype="multipart/form-data">
-            {!! csrf_field() !!}
+           @csrf
             <div class="box-body">
                 <div class="row">
                     <div class="col-lg-12">

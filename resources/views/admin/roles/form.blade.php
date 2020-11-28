@@ -9,7 +9,6 @@
         <hr>
         <form role="form" method="POST" action="{{ isset($role) ? route('admin.roles.update', $role->id) : route('admin.roles.store')}}" enctype="multipart/form-data">
             @csrf
-            @method("PUT")
             <div class="box-body">
                 <div class="row">
                     <div class="col-lg-12">

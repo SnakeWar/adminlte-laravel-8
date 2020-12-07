@@ -9,8 +9,8 @@
     <a href="{{route('admin.posts.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> Nova Postagem</a>
     {{$posts}}
     @if($posts)
-    <div class="container-fluid">
-        <table class="table table-bordered table-striped data-table">
+    <div class="conteiner-fluid">
+        <table id="myTable" class="table table-bordered table-striped data-table">
             <thead>
             <th>#</th>
             <th>Título</th>
@@ -56,5 +56,9 @@
 @section('js')
     <script>
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
     </script>
     @stop

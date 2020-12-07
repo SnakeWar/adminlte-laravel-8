@@ -240,12 +240,13 @@ return [
             'text' => 'Postagem',
             'url'  => 'admin/posts',
             'can'  => 'read_posts',
+            'icon' => 'fa fa-fw fa-book'
         ],
         [
             'text'        => 'Categorias',
             'url'         => 'admin/categories',
-            'icon'        => 'far fa-fw fa-file',
-            'can'  => 'read_categories',
+            'icon'        => 'fa fa-fw fa-tag',
+            'can'         => 'read_categories',
 //            'label'       => 4,
   //          'label_color' => 'success',
         ],

@@ -9,7 +9,7 @@
         @include('flash::message')
         <a href="{{ route('admin.modules.create') }}" class="btn btn-primary mb-5"><i class="fa fa-plus"></i> Adicionar</a>
         <div class="container-fluid">
-            <table class="table table-bordered table-striped data-table">
+            <table id="myTable" class="table table-bordered table-striped data-table">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -44,4 +44,13 @@
         </div>
         <!-- /.box-body -->
     </div>
+@stop
+@section('js')
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
 @stop

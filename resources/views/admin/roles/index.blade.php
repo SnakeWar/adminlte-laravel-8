@@ -2,13 +2,12 @@
 @section('title_prefix', 'Admin - ')
 @section('title', $title)
 @section('content')
-    <h1>{{$title}}</h1>
-
-    <hr>
-    @include('flash::message')
-    <a href="{{route('admin.roles.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> Criar Grupo</a>
-    @if($roles)
     <div class="container-fluid">
+        <h1 class="text-black-50">{{$title}}</h1>
+        <hr>
+        @include('flash::message')
+        <a href="{{route('admin.roles.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> Criar Grupo</a>
+        @if($roles)
         <table id="myTable" class="table table-bordered table-striped data-table">
             <thead>
             <th class="d-sm-none">#</th>

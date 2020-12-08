@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         $users = $this->user->orderBy('id', 'desc')->with(['roles'])->paginate(10);
 
-        $data = ['users' => $users, 'title' => $this->title];
+        $data = ['users' => $users, 'title' => $this->title, 'subtitle' => 'Adicionar Usuário'];
 
         return view('admin.users.index')->with($data);
     }
@@ -42,7 +42,7 @@ class UserController extends Controller
     {
         $roles = Role::all();
 
-        $data = ['roles' => $roles, 'title' => $this->title, 'subtitle' => 'Adicionar usuário'];
+        $data = ['roles' => $roles, 'title' => $this->title, 'subtitle' => 'Adicionar Usuário'];
 
         return view('admin.users.form')->with($data);
     }
@@ -91,7 +91,7 @@ class UserController extends Controller
     {
         $user = $this->user->with(['roles'])->find($id);
         $roles = Role::all();
-        $data = ['user' => $user, 'roles' => $roles, 'title' => $this->title, 'subtitle' => 'Editar usuário'];
+        $data = ['user' => $user, 'roles' => $roles, 'title' => $this->title, 'subtitle' => 'Editar Usuário'];
 
         return view('admin.users.form')->with($data);
     }

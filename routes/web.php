@@ -24,7 +24,7 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
 
     Route::prefix('admin')->name('admin.')->group(function (){
-
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
         Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
         Route::resource('users', App\Http\Controllers\Admin\UserController::class);
@@ -36,8 +36,4 @@ Route::middleware('auth')->group(function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

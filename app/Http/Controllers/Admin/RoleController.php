@@ -27,7 +27,7 @@ class RoleController extends Controller
     {
 
         $roles = $this->role->orderBy('id', 'desc')->with(['permissions'])->paginate(10);
-        return view('admin.roles.index', ['roles' => $roles, 'title' => 'Grupos']);
+        return view('admin.roles.index', ['roles' => $roles, 'title' => 'Grupos', 'subtitle' => 'Adicionar Grupo']);
     }
     public function create()
     {

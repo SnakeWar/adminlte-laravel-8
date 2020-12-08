@@ -4,9 +4,13 @@
 @section('content')
     <div class="container-fluid">
         <h1 class="text-black-50">{{$title}}</h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ route('admin.home') }}" class="pr-1"><i class="fa fa-address-card"></i> Home /</a></li>
+            <li class="active">{{$title}}</li>
+        </ol>
         <hr>
         @include('flash::message')
-        <a href="{{route('admin.roles.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> Criar Grupo</a>
+        <a href="{{route('admin.roles.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> {{$subtitle}}</a>
         @if($roles)
         <table id="myTable" class="table table-bordered table-striped data-table">
             <thead>

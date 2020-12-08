@@ -33,7 +33,7 @@ class PostController extends Controller
         $this->post = $post;
         $this->category = $category;
         $this->title = 'Postagens';
-        $this->subtitle = 'Criar Postagem';
+        $this->subtitle = 'Adicionar Postagem';
     }
 
     /**

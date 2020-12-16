@@ -51,10 +51,10 @@ class ModuleController extends Controller
         $module = $this->module->create($dataForm);
         if (isset($module) && !is_null($module)) {
             // CRUD permissions
-            Permission::create(array('title' => ('create_'.strtolower(sanitizeString($module->title))), 'module_id' => $module->id));
-            Permission::create(array('title' => ('read_'.strtolower(sanitizeString($module->title))), 'module_id' => $module->id));
-            Permission::create(array('title' => ('update_'.strtolower(sanitizeString($module->title))), 'module_id' => $module->id));
-            Permission::create(array('title' => ('delete_'.strtolower(sanitizeString($module->title))), 'module_id' => $module->id));
+            Permission::create(array('title' => ('create_'.strtolower(sanitizeString($module->url))), 'module_id' => $module->id));
+            Permission::create(array('title' => ('read_'.strtolower(sanitizeString($module->url))), 'module_id' => $module->id));
+            Permission::create(array('title' => ('update_'.strtolower(sanitizeString($module->url))), 'module_id' => $module->id));
+            Permission::create(array('title' => ('delete_'.strtolower(sanitizeString($module->url))), 'module_id' => $module->id));
         }
         if($module){
             return redirect('/admin/modules')->with('success', 'Módulo criado com sucesso!');
@@ -88,16 +88,16 @@ class ModuleController extends Controller
         if($module->update($dataForm)){
             Permission::where('module_id', $id)
                 ->where('title', 'like', 'create_%')
-                ->update(['title' => 'create_'.strtolower(sanitizeString($module->title))]);
+                ->update(['title' => 'create_'.strtolower(sanitizeString($module->url))]);
             Permission::where('module_id', $id)
                 ->where('title', 'like', 'read_%')
-                ->update(['title' => 'read_'.strtolower(sanitizeString($module->title))]);
+                ->update(['title' => 'read_'.strtolower(sanitizeString($module->url))]);
             Permission::where('module_id', $id)
                 ->where('title', 'like', 'update_%')
-                ->update(['title' => 'update_'.strtolower(sanitizeString($module->title))]);
+                ->update(['title' => 'update_'.strtolower(sanitizeString($module->url))]);
             Permission::where('module_id', $id)
                 ->where('title', 'like', 'delete_%')
-                ->update(['title' => 'delete_'.strtolower(sanitizeString($module->title))]);
+                ->update(['title' => 'delete_'.strtolower(sanitizeString($module->url))]);
 
             return redirect('/admin/modules')->with('success', 'Módulo alterado com sucesso!');
         }else{

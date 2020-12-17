@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label for="">Conteúdo</label>
-                <textarea type="text" id="editor" name="body" cols="30" rows="10" class="form-control @error('body') is-invalid @enderror" value="{{old('body')}}"></textarea>
+                <textarea type="text" id="editor" name="body" cols="30" rows="10" class="form-control @error('body') is-invalid @enderror">{{old('body')}}</textarea>
                 @error('body')
                 <div class="invalid-feedback">
                     {{$message}}

@@ -105,7 +105,7 @@ class PostController extends Controller
         $categories = $this->category->all();
         $post = $this->post->findOrFail($id);
 
-        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories]);
+        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories, 'title' => $this->subtitle]);
     }
 
     /**

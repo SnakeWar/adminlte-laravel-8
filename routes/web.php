@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pages\PagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->middleware('auth');
+Route::view('/', 'pages.welcome');
 
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-
     Route::prefix('admin')->name('admin.')->group(function (){
-        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
         Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
         Route::resource('users', App\Http\Controllers\Admin\UserController::class);
@@ -32,8 +28,3 @@ Route::middleware('auth')->group(function () {
         Route::resource('modules', App\Http\Controllers\Admin\ModuleController::class);
     });
 });
-
-
-Auth::routes();
-
-

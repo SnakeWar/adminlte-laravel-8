@@ -2031,7 +2031,6 @@ __webpack_require__.r(__webpack_exports__);
     getCategory: function getCategory(category) {
       var _this3 = this;
 
-      category = category + 1;
       axios.get('/api/post/' + category).then(function (response) {
         _this3.posts = response.data.data[0].posts;
       })["catch"](function (error) {
@@ -2041,15 +2040,29 @@ __webpack_require__.r(__webpack_exports__);
     infiniteHandler: function infiniteHandler($state) {
       var _this4 = this;
 
-      this.$http.get('/api/posts?page=' + this.page).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        $.each(data.data, function (key, value) {
-          _this4.posts.push(value);
+      var timeOut = 0;
+
+      if (this.page > 1) {
+        timeOut = 1000;
+      }
+
+      setTimeout(function () {
+        var vm = _this4;
+        window.axios.get('/pins?page=' + _this4.page).then(function (_ref) {
+          var data = _ref.data;
+          vm.lastPage = data.last_page;
+          $.each(data.data, function (key, value) {
+            vm.list.push(value);
+          });
+
+          if (vm.page - 1 === vm.lastPage) {
+            $state.complete();
+          } else {
+            $state.loaded();
+          }
         });
-        $state.loaded();
-      });
-      this.page = this.page + 1;
+        _this4.page = _this4.page + 1;
+      }, timeOut);
     }
   }
 });
@@ -37687,7 +37700,7 @@ var render = function() {
                   staticClass: "list-group-item selecionado",
                   on: {
                     click: function($event) {
-                      return _vm.getCategory(index)
+                      return _vm.getCategory(category.id)
                     }
                   }
                 },
@@ -37711,33 +37724,44 @@ var render = function() {
         _c(
           "div",
           { staticClass: "row p-5" },
-          _vm._l(_vm.posts, function(post) {
-            return _c("div", { staticClass: "col-lg-4 col-md-6 mb-4" }, [
-              _c("div", { staticClass: "card h-100" }, [
-                _c("a", { attrs: { href: "#" } }, [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: { src: /storage/ + post.photo, alt: "" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h4", { staticClass: "card-title" }, [
-                    _c("a", { attrs: { href: "#" } }, [
-                      _vm._v(_vm._s(post.title))
+          [
+            _vm._l(_vm.posts, function(post) {
+              return _c("div", { staticClass: "col-lg-4 col-md-6 mb-4" }, [
+                _c("div", { staticClass: "card h-100" }, [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _c("img", {
+                      staticClass: "card-img-top",
+                      attrs: { src: /storage/ + post.photo, alt: "" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "card-title" }, [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _vm._v(_vm._s(post.title))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(_vm._s(post.description))
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(_vm._s(post.description))
-                  ])
-                ]),
-                _vm._v(" "),
-                _vm._m(1, true)
+                  _vm._m(1, true)
+                ])
               ])
-            ])
-          }),
-          0
+            }),
+            _vm._v(" "),
+            _c("infinite-loading", {
+              on: {
+                distance: function($event) {
+                  1
+                },
+                infinite: _vm.infiniteHandler
+              }
+            })
+          ],
+          2
         )
       ])
     ])

@@ -15,7 +15,6 @@
                 </div>
 @endsection
 @section('js')
-
 {{--@include('pages.layouts.partials.filter_script')--}}
 <script>
     $(document).ready(function(){
@@ -34,6 +33,5 @@
             $(".selecionado.negrito").removeClass("negrito");
         });
     });
-
 </script>
 @stop

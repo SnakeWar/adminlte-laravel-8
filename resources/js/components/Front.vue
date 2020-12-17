@@ -12,7 +12,7 @@
                     <a class="list-group-item selecionado negrito" v-on:click="loadPosts">
                         Todos
                     </a>
-                    <a class="list-group-item selecionado" v-on:click="getCategory(index)" v-for="(category, index) in categories">
+                    <a class="list-group-item selecionado" v-on:click="getCategory(category.id)" v-for="(category, index) in categories">
                         {{ category.name }}
                     </a>
                 </div>
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-<!--                    <infinite-loading @distance="1" @infinite="infiniteHandler"></infinite-loading>-->
+                    <infinite-loading @distance="1" @infinite="infiniteHandler"></infinite-loading>
                 </div>
                 <!-- /.row -->
 
@@ -120,7 +120,6 @@ export default {
                 });
         },
         getCategory: function (category) {
-            category = category+1;
             axios.get('/api/post/' + category)
                 .then((response) => {
                     this.posts = response.data.data[0].posts
@@ -131,18 +130,41 @@ export default {
                 });
         },
         infiniteHandler($state) {
-            this.$http.get('/api/posts?page='+this.page)
-                .then(response => {
-                    return response.json();
 
-                }).then(data => {
-                $.each(data.data, (key, value)=> {
-                    this.posts.push(value);
+            let timeOut = 0;
+
+            if (this.page > 1) {
+                timeOut = 1000;
+            }
+
+            setTimeout(() => {
+
+                let vm = this;
+
+                window.axios.get('/pins?page='+this.page).then(({ data }) => {
+
+                    vm.lastPage = data.last_page;
+
+                    $.each(data.data, function(key, value){
+
+                        vm.list.push(value);
+
+                    });
+
+                    if (vm.page - 1 === vm.lastPage) {
+                        $state.complete();
+                    }
+
+                    else {
+                        $state.loaded();
+                    }
+
                 });
-                $state.loaded();
-            });
 
-            this.page = this.page + 1;
+                this.page = this.page + 1;
+
+            }, timeOut);
+
         },
     }
 }

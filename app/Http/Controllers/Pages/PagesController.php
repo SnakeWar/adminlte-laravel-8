@@ -19,22 +19,14 @@ class PagesController extends Controller
         $this->category = $category;
         $this->post = $post;
     }
-
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        $categories = $this->category::all();
-        $posts = $this->post::with('categories')->paginate(1);
-        return view('pages.welcome', ['segments' => $categories, 'products' => $posts]);
-    }
     public function post($slug)
     {
         $post = $this->post::whereSlug($slug)->first();
-
         return view('pages.post', ['post' => $post, 'title' => 'Blog Maxmeio - Título: ' . $post->slug]);
     }
 }

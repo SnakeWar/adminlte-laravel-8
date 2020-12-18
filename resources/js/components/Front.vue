@@ -8,10 +8,10 @@
                     <input v-model="search_post" placeholder="Pesquise..." class="list-group-item mb-1" v-on:input="getPost(search_post)">
                 </div>
                 <div class="list-group">
-                    <a class="list-group-item selecionado" v-bind:class="[isActive==0 ? activeClass : '']" v-on:click="loadPosts">
+                    <a class="list-group-item selecionado" href="#" v-bind:class="[isActive==0 ? activeClass : '']" v-on:click="loadPosts">
                         Todos
                     </a>
-                    <a class="list-group-item selecionado" v-bind:class="[isActive==category.id ? activeClass : '']" v-on:click="getCategory(category.id)" v-for="(category, index) in categories">
+                    <a class="list-group-item selecionado" href="#" v-bind:class="[isActive==category.id ? activeClass : '']" v-on:click="getCategory(category.id)" v-for="(category, index) in categories">
                         {{ category.name }}
                     </a>
                 </div>
@@ -44,9 +44,11 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+                <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>
                 <div class="row p-5 justify-content-center">
                     <div class="" :class="{'loading' : loading}">
                     </div>
+
                     <div class="col-lg-4 col-md-6 mb-4" v-for="post in posts">
                         <div class="card h-100">
                             <a href="#"><img class="card-img-top" v-bind:src="/storage/ + post.photo" alt=""></a>
@@ -62,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-<!--                    <infinite-loading @distance="1" @infinite="infiniteHandler"></infinite-loading>-->
+
                 </div>
                 <!-- /.row -->
 
@@ -81,7 +83,6 @@ export default {
     name: "Front",
     data: function () {
         return {
-            message: '',
             categories: [],
             posts: [],
             search_post: '',
@@ -89,6 +90,7 @@ export default {
             page: 1,
             isActive: 0,
             activeClass: 'active',
+            laravelData: {}
         }
     },
     // computed: {
@@ -114,12 +116,13 @@ export default {
                 console.log(error)
             });
         },
-        loadPosts: function () {
+        loadPosts: function (page = 1) {
             //Carregar postagens
-            axios.get('/api/posts')
+            axios.get('/api/posts?page='+ page)
                 .then((response) => {
                     this.isActive = 0
                     this.posts = response.data.data
+                    this.laravelData = response.data
                     this.loading = false
                 })
                 .catch(function (error){
@@ -144,48 +147,10 @@ export default {
                     console.log(response)
                     this.isActive = -1
                     this.posts = response.data.data
-
                 })
                 .catch(function (error){
                     console.log(error)
                 });
-        },
-        infiniteHandler: function ($state) {
-
-            let timeOut = 0;
-
-            if (this.page > 1) {
-                timeOut = 1000;
-            }
-
-            setTimeout(() => {
-
-                let vm = this;
-
-                window.axios.get('/posts?page='+this.page).then(({ data }) => {
-
-                    vm.lastPage = data.last_page;
-
-                    $.each(data.data, function(key, value){
-
-                        vm.posts.push(value);
-
-                    });
-
-                    if (vm.page - 1 === vm.lastPage) {
-                        $state.complete();
-                    }
-
-                    else {
-                        $state.loaded();
-                    }
-
-                });
-
-                this.page = this.page + 1;
-
-            }, timeOut);
-
         },
     }
 }

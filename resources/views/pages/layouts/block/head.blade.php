@@ -3,14 +3,14 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Shop Homepage - Start Bootstrap Template</title>
+<title>{{$title}}</title>
 
 <!-- Bootstrap core CSS -->
-<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
 <!-- Custom styles for this template -->
-<link href="assets/css/shop-homepage.css" rel="stylesheet">
-<link href="assets/css/shop-homepage.css" rel="stylesheet">
+<link href="{{asset('assets/css/shop-homepage.css')}}" rel="stylesheet">
+<link href="{{asset('assets/css/shop-homepage.css')}}" rel="stylesheet">
 <style>
     .loading {
         border: 16px solid #f3f3f3; /* Light grey */

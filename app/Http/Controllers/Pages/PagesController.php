@@ -31,35 +31,10 @@ class PagesController extends Controller
         $posts = $this->post::with('categories')->paginate(1);
         return view('pages.welcome', ['segments' => $categories, 'products' => $posts]);
     }
-    public function posts(Request $request)
+    public function post($slug)
     {
-        $data = $request->all();
+        $post = $this->post::whereSlug($slug)->first();
 
-        $orderBy = empty($data['order']) ? 'asc' : $data['order'];
-
-        $product_query = $this->post::with('categories')->get();
-
-        if(!empty($data['segment'])) {
-            $segment_id = $data['segment'];
-            $product_query = $product_query->where('segment_id', $segment_id);
-        }
-
-        if(!empty($data['term'])) {
-            $product_query = $product_query->where('title', 'like', "%{$data['term']}%");
-        }
-
-        $response = $product_query->paginate(1);
-
-        $last_page = $response->lastPage();
-
-        setlocale(LC_MONETARY, "pt_BR");
-
-        if(empty($data['order'])){
-            $response = $response->shuffle();
-        }
-        return response()->json([
-            'last_page' => $last_page,
-            'data' => $response
-        ]);
+        return view('pages.post', ['post' => $post, 'title' => 'Blog Maxmeio - Título: ' . $post->slug]);
     }
 }

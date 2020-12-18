@@ -15,7 +15,7 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        Post::create([
+        $post = Post::create([
             'title' => Str::random(8),
             'description' => Str::random(10),
             'body' => Str::random(100),
@@ -23,7 +23,8 @@ class PostsTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
             'user_id' => 1,
-            'category_id' => 1
         ]);
+        $post->categories()->sync([3]);
+
     }
 }

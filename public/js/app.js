@@ -1986,22 +1986,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Front",
   data: function data() {
     return {
+      message: '',
       categories: [],
       posts: [],
+      search_post: '',
       loading: true,
-      page: 1
+      page: 1,
+      isActive: 0,
+      activeClass: 'active'
     };
   },
+  // computed: {
+  //     classObject: function () {
+  //         return {
+  //             active: this.isActive && !this.error,
+  //             'text-danger': this.error && this.error.type === 'fatal'
+  //         }
+  //     }
+  // },
   mounted: function mounted() {
     this.loadCategories();
     this.loadPosts();
@@ -2022,6 +2028,7 @@ __webpack_require__.r(__webpack_exports__);
 
       //Carregar postagens
       axios.get('/api/posts').then(function (response) {
+        _this2.isActive = 0;
         _this2.posts = response.data.data;
         _this2.loading = false;
       })["catch"](function (error) {
@@ -2032,13 +2039,26 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.get('/api/post/' + category).then(function (response) {
+        _this3.isActive = category;
         _this3.posts = response.data.data[0].posts;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    infiniteHandler: function infiniteHandler($state) {
+    getPost: function getPost(evt) {
       var _this4 = this;
+
+      console.log(evt);
+      axios.get('/api/post_search/' + evt).then(function (response) {
+        console.log(response);
+        _this4.isActive = -1;
+        _this4.posts = response.data.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    infiniteHandler: function infiniteHandler($state) {
+      var _this5 = this;
 
       var timeOut = 0;
 
@@ -2047,12 +2067,12 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       setTimeout(function () {
-        var vm = _this4;
-        window.axios.get('/pins?page=' + _this4.page).then(function (_ref) {
+        var vm = _this5;
+        window.axios.get('/posts?page=' + _this5.page).then(function (_ref) {
           var data = _ref.data;
           vm.lastPage = data.last_page;
           $.each(data.data, function (key, value) {
-            vm.list.push(value);
+            vm.posts.push(value);
           });
 
           if (vm.page - 1 === vm.lastPage) {
@@ -2061,7 +2081,7 @@ __webpack_require__.r(__webpack_exports__);
             $state.loaded();
           }
         });
-        _this4.page = _this4.page + 1;
+        _this5.page = _this5.page + 1;
       }, timeOut);
     }
   }
@@ -37678,7 +37698,36 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-lg-3" }, [
-        _c("h1", { staticClass: "my-4" }, [_vm._v("Shop Name")]),
+        _c("h1", { staticClass: "my-4" }, [_vm._v("Blog Maxmeio")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "list-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.search_post,
+                expression: "search_post"
+              }
+            ],
+            staticClass: "list-group-item mb-1",
+            attrs: { placeholder: "Pesquise..." },
+            domProps: { value: _vm.search_post },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.search_post = $event.target.value
+                },
+                function($event) {
+                  return _vm.getPost(_vm.search_post)
+                }
+              ]
+            }
+          })
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -37687,7 +37736,8 @@ var render = function() {
             _c(
               "a",
               {
-                staticClass: "list-group-item selecionado negrito",
+                staticClass: "list-group-item selecionado",
+                class: [_vm.isActive == 0 ? _vm.activeClass : ""],
                 on: { click: _vm.loadPosts }
               },
               [_vm._v("\n                        Todos\n                    ")]
@@ -37698,6 +37748,7 @@ var render = function() {
                 "a",
                 {
                   staticClass: "list-group-item selecionado",
+                  class: [_vm.isActive == category.id ? _vm.activeClass : ""],
                   on: {
                     click: function($event) {
                       return _vm.getCategory(category.id)
@@ -37723,8 +37774,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "row p-5" },
+          { staticClass: "row p-5 justify-content-center" },
           [
+            _c("div", { class: { loading: _vm.loading } }),
+            _vm._v(" "),
             _vm._l(_vm.posts, function(post) {
               return _c("div", { staticClass: "col-lg-4 col-md-6 mb-4" }, [
                 _c("div", { staticClass: "card h-100" }, [
@@ -37737,7 +37790,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "card-body" }, [
                     _c("h4", { staticClass: "card-title" }, [
-                      _c("a", { attrs: { href: "#" } }, [
+                      _c("a", { attrs: { href: /post/ + post.slug } }, [
                         _vm._v(_vm._s(post.title))
                       ])
                     ]),
@@ -37750,15 +37803,6 @@ var render = function() {
                   _vm._m(1, true)
                 ])
               ])
-            }),
-            _vm._v(" "),
-            _c("infinite-loading", {
-              on: {
-                distance: function($event) {
-                  1
-                },
-                infinite: _vm.infiniteHandler
-              }
             })
           ],
           2

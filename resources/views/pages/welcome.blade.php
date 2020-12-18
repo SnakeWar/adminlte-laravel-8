@@ -16,22 +16,4 @@
 @endsection
 @section('js')
 {{--@include('pages.layouts.partials.filter_script')--}}
-<script>
-    $(document).ready(function(){
-        var currentItem = null;
-        $(".selecionado").click(function(e) {
-            if($(this).hasClass("negrito")) {
-                $(this).removeClass("negrito")
-                currentItem = null;
-            } else {
-                $(".selecionado.negrito").removeClass("negrito");
-                currentItem = $(this).addClass("negrito");
-            }
-            e.stopPropagation();
-        });
-        $(document).click(function() {
-            $(".selecionado.negrito").removeClass("negrito");
-        });
-    });
-</script>
 @stop

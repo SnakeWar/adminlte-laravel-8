@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'pages.welcome', ['title' => 'Blog Maxmeio'])->name('home');
+Route::view('/', 'pages.welcome', ['title' => 'Loja Virtual'])->name('home');
 Route::get('/post/{slug}', [App\Http\Controllers\Pages\PagesController::class, 'post'])->name('post');
 
 Auth::routes();

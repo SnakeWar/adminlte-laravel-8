@@ -1,11 +1,14 @@
 @extends('adminlte::page')
+@section('css')
+
+    @endsection
 @section('title_prefix', 'Admin - ')
 @section('title', $title)
 @section('content')
-    <div class="conteiner-fluid">
+    <div class="conteiner-fluid box box-primary">
         <h1 class="text-black-50">{{$title}}</h1>
         <ol class="breadcrumb">
-            <li><a href="{{ route('admin.home') }}" class="pr-1"><i class="fa fa-address-card"></i> Home /</a></li>
+            <li><a href="{{ route('home') }}" class="pr-1"><i class="fa fa-address-card"></i> Home /</a></li>
             <li class="active">{{$title}}</li>
         </ol>
         <hr>

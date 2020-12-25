@@ -38252,7 +38252,7 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-lg-3" }, [
-        _c("h1", { staticClass: "my-4" }, [_vm._v("Blog Maxmeio")]),
+        _c("h1", { staticClass: "my-4" }, [_vm._v("Loja Virtual")]),
         _vm._v(" "),
         _c("div", { staticClass: "list-group" }, [
           _c("input", {
@@ -50823,8 +50823,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\adminlte-laravel-8\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\adminlte-laravel-8\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\xampp\htdocs\adminlte-laravel-8\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\xampp\htdocs\adminlte-laravel-8\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

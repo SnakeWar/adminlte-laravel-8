@@ -27,6 +27,6 @@ class PagesController extends Controller
     public function post($slug)
     {
         $post = $this->post::whereSlug($slug)->first();
-        return view('pages.post', ['post' => $post, 'title' => 'Blog Maxmeio - Título: ' . $post->slug]);
+        return view('pages.post', ['post' => $post, 'title' => 'Loja Virtual - ' . $post->slug]);
     }
 }

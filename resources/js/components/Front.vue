@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <h1 class="my-4">Blog Maxmeio</h1>
+                <h1 class="my-4">Loja Virtual</h1>
                 <div class="list-group">
                     <input v-model="search_post" placeholder="Pesquise..." class="list-group-item mb-1" v-on:input="getPost(search_post)">
                 </div>

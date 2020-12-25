@@ -30,8 +30,8 @@ return [
     |
     */
 
-    'use_ico_only' => false,
-    'use_full_favicon' => true,
+    'use_ico_only' => true,
+    'use_full_favicon' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -188,7 +188,7 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin',
 
     'logout_url' => 'logout',
 
@@ -231,11 +231,11 @@ return [
     */
 
     'menu' => [
-//        [
-//            'text' => 'search',
-//            'search' => true,
-//            'topnav' => true,
-//        ],
+        [
+            'text' => 'Dashboard',
+            'url'  => 'admin',
+            'icon' => 'fa fa-fw fa-dashboard'
+        ],
         [
             'text' => 'Postagem',
             'url'  => 'admin/posts',

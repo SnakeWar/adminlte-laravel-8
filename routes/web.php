@@ -27,5 +27,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', App\Http\Controllers\Admin\UserController::class);
         Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
         Route::resource('modules', App\Http\Controllers\Admin\ModuleController::class);
+
+        Route::post('post_photo/remove', [App\Http\Controllers\Admin\PostPhotosController::class, 'removePhoto'])->name('post_photo_remove');
     });
 });

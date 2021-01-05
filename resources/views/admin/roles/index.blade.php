@@ -49,7 +49,7 @@
         @else
         <p class="ml-5">Não tem nada ainda...</p>
     @endif
-        {{$roles->links()}}
+{{--        {{$roles->links()}}--}}
 @endsection
 @section('js')
     <script>

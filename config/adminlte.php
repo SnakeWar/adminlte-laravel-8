@@ -234,13 +234,13 @@ return [
         [
             'text' => 'Dashboard',
             'url'  => 'admin',
-            'icon' => 'fa fa-fw fa-dashboard'
+            'icon' => 'fa fa-fw fa-folder-open'
         ],
         [
             'text' => 'Postagem',
             'url'  => 'admin/posts',
             'can'  => 'read_posts',
-            'icon' => 'fa fa-fw fa-book'
+            'icon' => 'fa fa-fw fa-newspaper'
         ],
         [
             'text'        => 'Categorias',

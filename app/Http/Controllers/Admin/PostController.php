@@ -103,8 +103,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $categories = $this->category->all();
-        $post = $this->post->findOrFail($id);
-
+        $post = $this->post::with('photos')->findOrFail($id);
+        //dd($post);
         return view('admin.posts.edit', ['post' => $post, 'categories' => $categories, 'title' => $this->subtitle]);
     }
 
@@ -117,7 +117,7 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, $id)
     {
-        $data = $request->except('categories');
+        $data = $request->except(['categories', 'photos']);
 
         $categories = $request->get('categories', null);
 
@@ -133,6 +133,12 @@ class PostController extends Controller
 
         if(!is_null($categories))
             $post->categories()->sync($categories);
+
+        if($request->hasFile('photos')){
+
+            $images = $this->imageUpload($request->file('photos'), 'photo');
+            $post->photos()->createMany($images);
+        }
 
         flash('Postagem Atualizada com Sucesso!')->success();
         return redirect()->route('admin.posts.index');

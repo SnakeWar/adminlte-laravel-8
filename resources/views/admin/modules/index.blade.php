@@ -41,7 +41,7 @@
                 </tbody>
             </table>
 
-            {!! $modules->links() !!}
+{{--            {!! $modules->links() !!}--}}
 
         </div>
         <!-- /.box-body -->

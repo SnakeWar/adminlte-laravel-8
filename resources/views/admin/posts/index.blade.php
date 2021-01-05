@@ -56,7 +56,7 @@
         @else
         <p class="ml-5">Não tem nada ainda...</p>
     @endif
-        {{$posts->links()}}
+{{--        {{$posts->links()}}--}}
 @endsection
 @section('js')
     <script>

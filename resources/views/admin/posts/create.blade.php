@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <label for="">Conteúdo</label>
-                <textarea type="text" id="editor" name="body" cols="30" rows="10" class="form-control @error('body') is-invalid @enderror">{{old('body')}}</textarea>
+                <textarea type="text" id="editor1" name="body" cols="30" rows="10" class="form-control @error('body') is-invalid @enderror">{{old('body')}}</textarea>
                 @error('body')
                 <div class="invalid-feedback">
                     {{$message}}
@@ -86,42 +86,35 @@
     </div>
 
 @endsection
-
 @section('js')
-{{--    @include('ckfinder::setup')--}}
-{{--    <script> console.log('Hi!'); </script>--}}
-{{--    <script>--}}
-{{--        $(document).ready(function(){--}}
-{{--            $(selector).inputmask("99-9999999");  //static mask--}}
-{{--            $(selector).inputmask({"mask": "(999) 999-9999"}); //specifying options--}}
-{{--            $(selector).inputmask("9-a{1,3}9{1,3}"); //mask with dynamic syntax--}}
-{{--        });--}}
-{{--    </script>--}}
-    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-    @include('ckfinder::setup')
+    <style>
+        .ck-editor__editable {
+            min-height: 200px;
+        }
+    </style>
+    <script src="https://cdn.ckeditor.com/4.14.0/standard-all/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
     <script>
-        // ClassicEditor
-        //     .create( document.querySelector( '#editor' ) ,{
-        //         //extraPlugins: [ MyUploadAdapterPlugin ],
-        //     })
-        //     .then( editor => {
-        //         console.log( editor );
-        //     } )
-        //     .catch( error => {
-        //         console.error( error );
-        //     } );
-        ClassicEditor
-            .create( document.querySelector( '#editor' ), {
-
-                ckfinder: {
-                    uploadUrl: 'http://localhost/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
-                },
-
-            } )
-            .catch( function( error ) {
-                console.error( error );
+        // Note: in this sample we use CKEditor with two extra plugins:
+        // - uploadimage to support pasting and dragging images,
+        // - image2 (instead of image) to provide images with captions.
+        // Additionally, the CSS style for the editing area has been slightly modified to provide responsive images during editing.
+        // All these modifications are not required by CKFinder, they just provide better user experience.
+        if ( typeof CKEDITOR !== 'undefined' ) {
+            CKEDITOR.disableAutoInline = true;
+            CKEDITOR.addCss( 'img {max-width:100%; height: auto;}' );
+            var editor = CKEDITOR.replace( 'editor1', {
+                extraPlugins: 'uploadimage,image2',
+                removePlugins: 'image',
+                height:250
             } );
+            CKFinder.setupCKEditor( editor );
+        } else {
+            document.getElementById( 'editor1' ).innerHTML =
+                '<div class="tip-a tip-a-alert">This sample requires working Internet connection to load CKEditor 4 from CDN.</div>'
+        }
     </script>
+    <script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" type="text/javascript"></script>
 @stop
 @section('scripts')
 {{--    <script src="{{asset('assets/js/jquerymaskmoney/jquery.maskMoney.min.js')}}"></script>--}}

@@ -48,7 +48,7 @@
         @else
             <p class="ml-5">Não tem nada ainda...</p>
         @endif
-        {{$categories->links()}}
+{{--        {{$categories->links()}}--}}
     </div>
 @endsection
 @section('js')

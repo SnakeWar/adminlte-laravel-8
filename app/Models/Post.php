@@ -6,23 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
-    use HasFactory, Sluggable, SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function setTitleAttribute($value)
     {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
+        $slug = Str::slug($value);
+        $matchs = $this->uniqueSlug($slug);
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = $matchs ? $slug . '-' . $matchs : $slug;
+    }
+    public function uniqueSlug($slug)
+    {
+        $matchs = $this->whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->count();
+        return $matchs;
     }
 
     protected $fillable = ['title', 'description', 'slug', 'body', 'photo', 'user_id'];
@@ -33,5 +38,9 @@ class Post extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+    public function photos()
+    {
+        return $this->hasMany(PostPhotos::class);
     }
 }

@@ -12,7 +12,7 @@
                             {{ $post->title }}
                         </h4>
                         <!--                                <h5>$24.99</h5>-->
-                        <p class="card-text">{{ $post->body }}</p>
+                        <p class="card-text">{!! $post->body !!}</p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>

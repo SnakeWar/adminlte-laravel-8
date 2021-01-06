@@ -19,7 +19,7 @@
             <thead>
             <th>#</th>
             <th>Título</th>
-            <th>Descrição</th>
+            <th>Foto</th>
             <th>Autor</th>
             <th>Ações</th>
             </thead>
@@ -32,8 +32,8 @@
                     <td>
                         {{$post->title}}
                     </td>
-                    <td>
-                        {{$post->description}}
+                    <td >
+                        <img src="{{asset("storage/$post->photo")}}" class="img-fluid w-25" alt="">
                     </td>
                     <td>
                         {{$post->user->name}}

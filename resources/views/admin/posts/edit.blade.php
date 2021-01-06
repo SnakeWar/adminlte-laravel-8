@@ -10,7 +10,9 @@
         <h1>
             Editar Postagem
         </h1>
+        @include('flash::message')
         <hr>
+
         <form action="{{route('admin.posts.update', ['post' => $post->id])}}" method="post"
               enctype="multipart/form-data">
             @csrf
@@ -97,7 +99,7 @@
                     <form action="{{route('admin.post_photo_remove')}}" method="post">
                         @csrf
                         <input type="hidden" name="photoName" value="{{$photo->photo}}">
-                        <button type="submit" class="btn btn-sm btn-danger my-2"><i class="fa fx fa-close"></i></button>
+                        <button type="submit" class="btn btn-sm btn-danger my-2"><i class="fa fx fa-close">Remover</i></button>
                     </form>
                     <img src="{{asset('storage/' . $photo->photo)}}" alt="" class="img-responsive w-25">
 
@@ -115,7 +117,6 @@
         }
     </style>
     <script src="https://cdn.ckeditor.com/4.14.0/standard-all/ckeditor.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/19.0.0/classic/ckeditor.js"></script>
     <script>
         // Note: in this sample we use CKEditor with two extra plugins:
         // - uploadimage to support pasting and dragging images,
@@ -130,7 +131,6 @@
                 removePlugins: 'image',
                 height: 250
             });
-            CKFinder.setupCKEditor(editor);
         } else {
             document.getElementById('editor1').innerHTML =
                 '<div class="tip-a tip-a-alert">This sample requires working Internet connection to load CKEditor 4 from CDN.</div>'

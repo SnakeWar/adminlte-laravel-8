@@ -15,8 +15,8 @@
 
             <div class="form-group">
                 <label for="">Nome Categoria</label>
-                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
-                @error('name')
+                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}">
+                @error('title')
                 <div class="invalid-feedback">
                     {{$message}}
                 </div>

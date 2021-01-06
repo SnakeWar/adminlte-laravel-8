@@ -21,15 +21,6 @@ class PostController extends Controller
 
     public function __construct(Post $post, Category $category)
     {
-        $authenticationMiddleware = config('ckfinder.authentication');
-
-        if(!is_callable($authenticationMiddleware)) {
-            if(isset($authenticationMiddleware) && is_string($authenticationMiddleware)) {
-                $this->middleware($authenticationMiddleware);
-            } else {
-                $this->middleware(\CKSource\CKFinderBridge\CKFinderMiddleware::class);
-            }
-        }
         $this->post = $post;
         $this->category = $category;
         $this->title = 'Postagens';
@@ -135,9 +126,10 @@ class PostController extends Controller
             $post->categories()->sync($categories);
 
         if($request->hasFile('photos')){
-
             $images = $this->imageUpload($request->file('photos'), 'photo');
             $post->photos()->createMany($images);
+            flash('Foto(s) adicionadas com Sucesso!')->success();
+            return redirect()->back();
         }
 
         flash('Postagem Atualizada com Sucesso!')->success();

@@ -30,7 +30,7 @@ class Category extends Model
         return $matchs;
     }
 
-    protected $fillable = ['name', 'description', 'slug'];
+    protected $fillable = ['title', 'description', 'slug'];
 
     public function posts()
     {

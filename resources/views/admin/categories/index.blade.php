@@ -26,7 +26,7 @@
                             {{$category->id}}
                         </td>
                         <td>
-                            {{$category->name}}
+                            {{$category->title}}
                         </td>
                         <td>
                             {{$category->description}}

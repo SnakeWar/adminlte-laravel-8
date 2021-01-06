@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'pages.welcome', ['title' => 'Loja Virtual'])->name('home');
-Route::get('/post/{slug}', [App\Http\Controllers\Pages\PagesController::class, 'post'])->name('post');
+Route::get('/postagem/{slug}', [App\Http\Controllers\Pages\PagesController::class, 'post'])->name('post');
 
 Auth::routes();
 

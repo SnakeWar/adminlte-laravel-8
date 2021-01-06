@@ -24,7 +24,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'         => 'required|unique:App\Models\Category,name',
+            'title'         => 'required|unique:App\Models\Category,title',
         ];
     }
     public function messages()

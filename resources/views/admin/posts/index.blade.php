@@ -20,6 +20,7 @@
             <th>#</th>
             <th>Título</th>
             <th>Foto</th>
+            <th>Autor</th>
             <th>Ações</th>
             </thead>
             <tbody>
@@ -33,6 +34,9 @@
                     </td>
                     <td >
                         <img src="{{asset("storage/$post->photo")}}" class="img-fluid w-25" alt="">
+                    </td>
+                    <td>
+                        {{$post->user->name}}
                     </td>
                     <td>
                         <div class="btn-group">

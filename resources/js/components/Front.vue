@@ -12,7 +12,7 @@
                         Todos
                     </a>
                     <a class="list-group-item selecionado" href="#" v-bind:class="[isActive==category.id ? activeClass : '']" v-on:click="getCategory(category.id)" v-for="(category, index) in categories">
-                        {{ category.name }}
+                        {{ category.title }}
                     </a>
                 </div>
             </div>
@@ -73,11 +73,14 @@
 
         </div>
         <!-- /.row -->
-
+        <div class="row">
+            <div class="col-12">
+                <div id="instafeed"></div>
+            </div>
+        </div>
     </div>
     <!-- /.container -->
 </template>
-
 <script>
 export default {
     name: "Front",

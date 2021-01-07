@@ -6,91 +6,93 @@
     <link rel="stylesheet" href="{{asset('dropify/fonts/dropify.ttf')}}">
 @endsection
 @section('content')
-    <div class="container-fluid card">
-        <h1>
-            Editar Postagem
-        </h1>
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h1 class="card-title">Editar {{$title}}</h1>
+        </div>
         @include('flash::message')
         <hr>
 
-        <form action="{{route('admin.posts.update', ['post' => $post->id])}}" method="post"
-              enctype="multipart/form-data">
-            @csrf
-            @method("PUT")
-            <div class="form-group">
-                <label for="">Título</label>
-                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                       value="{{$post->title}}">
-                @error('title')
-                <div class="invalid-feedback">
-                    {{$message}}
+        <div class="card-body">
+            <form action="{{route('admin.posts.update', ['post' => $post->id])}}" method="post"
+                  enctype="multipart/form-data">
+                @csrf
+                @method("PUT")
+                <div class="form-group">
+                    <label for="">Título</label>
+                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
+                           value="{{$post->title}}">
+                    @error('title')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
 
-            <div class="form-group">
-                <label for="">Descrição</label>
-                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                       value="{{$post->description}}">
-                @error('description')
-                <div class="invalid-feedback">
-                    {{$message}}
+                <div class="form-group">
+                    <label for="">Descrição</label>
+                    <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
+                           value="{{$post->description}}">
+                    @error('description')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
 
-            <div class="form-group">
-                <label for="">Categorias</label>
-                <select name="categories[]" id="" class="form-control" multiple>
-                    @foreach($categories as $category)
-                        <option value="{{$category->id}}"
-                                @if($post->categories->contains($category)) selected @endif>{{$category->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="">Conteúdo</label>
-                <textarea type="text" id="editor1" name="body" cols="30" rows="10"
-                          class="form-control @error('body') is-invalid @enderror">{{$post->body}}</textarea>
-                @error('body')
-                <div class="invalid-feedback">
-                    {{$message}}
+                <div class="form-group">
+                    <label for="">Categorias</label>
+                    <select name="categories[]" id="" class="form-control" multiple>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}"
+                                    @if($post->categories->contains($category)) selected @endif>{{$category->title}}</option>
+                        @endforeach
+                    </select>
                 </div>
-                @enderror
-            </div>
 
-            <div class="form-group">
-                <label for="">Foto</label>
-                <input type="file" class="dropify form-control @error('photo') is-invalid @enderror" name="photo">
-                @error('photo')
-                <div class="invalid-feedback">
-                    {{$message}}
+                <div class="form-group">
+                    <label for="">Conteúdo</label>
+                    <textarea type="text" id="editor1" name="body" cols="30" rows="10"
+                              class="form-control @error('body') is-invalid @enderror">{{$post->body}}</textarea>
+                    @error('body')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
-{{--            <div class="row">--}}
-{{--                <div class="col-6">--}}
-{{--                    <img src="{{asset('storage/' . $post->photo)}}" alt="" class="img-fluid w-25">--}}
-{{--                </div>--}}
-{{--            </div>--}}
-            <div class="form-group">
-                <label for="">Galeria</label>
-                <input type="file" class="dropify form-control @error('photos') is-invalid @enderror" name="photos[]"
-                       multiple>
-                @error('photos')
-                <div class="invalid-feedback">
-                    {{$message}}
-                </div>
-                @enderror
-            </div>
 
-            <div class="form-group mt-5">
-                <button type="submit" class="btn -btn-lg btn-success">
-                    Atualizar Postagem
-                </button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="">Foto</label>
+                    <input type="file" class="dropify form-control @error('photo') is-invalid @enderror" name="photo">
+                    @error('photo')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+                {{--            <div class="row">--}}
+                {{--                <div class="col-6">--}}
+                {{--                    <img src="{{asset('storage/' . $post->photo)}}" alt="" class="img-fluid w-25">--}}
+                {{--                </div>--}}
+                {{--            </div>--}}
+                <div class="form-group">
+                    <label for="">Galeria</label>
+                    <input type="file" class="dropify form-control @error('photos') is-invalid @enderror" name="photos[]"
+                           multiple>
+                    @error('photos')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-group mt-5">
+                    <button type="submit" class="btn -btn-lg btn-success">
+                        Atualizar
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="container-fluid p-5">
         <div class="row">

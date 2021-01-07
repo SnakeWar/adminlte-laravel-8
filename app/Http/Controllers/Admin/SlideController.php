@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SlideRequest;
+use App\Http\Requests\SlideUpdateRequest;
 use App\Models\Slide;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\Storage;
@@ -80,10 +82,9 @@ class SlideController extends Controller
      */
     public function edit($id)
     {
-        $categories = $this->category->all();
         $slide = $this->slide::with('photos')->findOrFail($id);
         //dd($slide);
-        return view('admin.slides.edit', ['slide' => $slide, 'categories' => $categories, 'title' => $this->subtitle]);
+        return view('admin.slides.edit', ['slide' => $slide, 'title' => $this->subtitle]);
     }
 
     /**

@@ -24,7 +24,15 @@ class SlideUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'         => 'required',
+            'description'         => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'required'  => 'Este campo é obrigatório.',
+//            'min'         => 'Campo deve ter no mínimo :min caracteres.',
         ];
     }
 }

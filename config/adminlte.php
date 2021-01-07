@@ -235,11 +235,13 @@ return [
         [
             'text' => 'Dashboard',
             'url'  => 'admin',
+
             'icon' => 'fa fa-fw fa-folder-open'
         ],
         [
             'text' => 'Slides',
-            'url'  => 'slides',
+            'url'  => 'admin/slides',
+            'can'  => 'read_slides',
             'icon' => 'fa fa-fw fa-image'
         ],
         [

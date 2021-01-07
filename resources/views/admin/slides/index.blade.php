@@ -10,35 +10,31 @@
         </ol>
         <hr>
         @include('flash::message')
-        <a href="{{route('admin.posts.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> {{$subtitle}}</a>
-        @if($posts)
+        <a href="{{route('admin.slides.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> {{$subtitle}}</a>
+        @if($slides)
         <table id="myTable" class="table table-bordered table-striped data-table">
             <thead>
             <th>#</th>
             <th>Título</th>
             <th>Foto</th>
-            <th>Autor</th>
             <th>Ações</th>
             </thead>
             <tbody>
-            @foreach($posts as $post)
+            @foreach($slides as $slide)
                 <tr>
                     <td>
-                        {{$post->id}}
+                        {{$slide->id}}
                     </td>
                     <td>
-                        {{$post->title}}
+                        {{$slide->title}}
                     </td>
                     <td >
-                        <img src="{{asset("storage/$post->photo")}}" class="img-fluid w-25" alt="">
-                    </td>
-                    <td>
-                        {{$post->user->name}}
+                        <img src="{{asset("storage/$slide->photo")}}" class="img-fluid w-25" alt="">
                     </td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{route('admin.posts.edit', [$post->id])}}" class="btn btn-sm btn-primary"><i style="color: white" class="fa fa-pencil-alt"></i></a>
-                            <form action="{{route('admin.posts.destroy', [$post->id])}}" method="post">
+                            <a href="{{route('admin.slides.edit', [$slide->id])}}" class="btn btn-sm btn-primary"><i style="color: white" class="fa fa-pencil-alt"></i></a>
+                            <form action="{{route('admin.slides.destroy', [$slide->id])}}" method="post">
                                 @csrf
                                 @method("DELETE")
                                 <button type="submit" class="btn btn-sm btn-danger" style="border-bottom-left-radius: 0;border-top-left-radius: 0"><i class="fa fa-fw fa-trash" style="color: white"></i></button>
@@ -53,7 +49,7 @@
         @else
         <p class="ml-5">Não tem nada ainda...</p>
     @endif
-{{--        {{$posts->links()}}--}}
+{{--        {{$slides->links()}}--}}
 @endsection
 @section('js')
     <script>

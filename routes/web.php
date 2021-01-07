@@ -22,13 +22,14 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function (){
         Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
-        Route::resource('slides', App\Http\Controllers\Admin\SlideController::class);
-        Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
-        Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
-        Route::resource('users', App\Http\Controllers\Admin\UserController::class);
-        Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
-        Route::resource('modules', App\Http\Controllers\Admin\ModuleController::class);
+        Route::resource('slides', App\Http\Controllers\Admin\SlideController::class)->middleware('can:read_slides');
+        Route::resource('posts', App\Http\Controllers\Admin\PostController::class)->middleware('can:read_posts');
+        Route::resource('roles', App\Http\Controllers\Admin\RoleController::class)->middleware('can:read_roles');
+        Route::resource('users', App\Http\Controllers\Admin\UserController::class)->middleware('can:read_users');
+        Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class)->middleware('can:read_categories');
+        Route::resource('modules', App\Http\Controllers\Admin\ModuleController::class)->middleware('can:read_modules');
 
-        Route::post('post_photo/remove', [App\Http\Controllers\Admin\PostPhotosController::class, 'removePhoto'])->name('post_photo_remove');
+        Route::post('post_photo/remove', [App\Http\Controllers\Admin\PostPhotosController::class, 'removePhoto'])->name('post_photo_remove')->middleware('can:delete_slides');
+        Route::post('slide_photo/remove', [App\Http\Controllers\Admin\SlidePhotosController::class, 'removePhoto'])->name('slide_photo_remove')->middleware('can:delete_posts');
     });
 });

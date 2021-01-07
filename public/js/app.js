@@ -1988,6 +1988,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Front",
   data: function data() {
@@ -38314,7 +38317,7 @@ var render = function() {
                 [
                   _vm._v(
                     "\n                        " +
-                      _vm._s(category.name) +
+                      _vm._s(category.title) +
                       "\n                    "
                   )
                 ]
@@ -38377,7 +38380,9 @@ var render = function() {
         ],
         1
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(2)
   ])
 }
 var staticRenderFns = [
@@ -38500,6 +38505,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-footer" }, [
       _c("small", { staticClass: "text-muted" }, [_vm._v("★ ★ ★ ★ ☆")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { attrs: { id: "instafeed" } })
+      ])
     ])
   }
 ]

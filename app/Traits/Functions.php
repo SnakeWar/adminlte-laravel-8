@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 trait Functions
 {
 
-    public function setfilenameRandom($length = 30)
+    private function setfilenameRandom($length = 30)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
         $charactersLength = strlen($characters);
@@ -18,18 +18,18 @@ trait Functions
         return $randomString;
     }
 
-    public function convertdatetoDb($data)
+    private function convertdatetoDb($data)
     {
         return (Carbon::createFromFormat('d/m/Y', $data)->format('Y-m-d'));
     }
 
 
-    public function convertdatetoSite($data)
+    private function convertdatetoSite($data)
     {
         return (Carbon::parse($data)->format('d/m/Y H:i:s'));
     }
 
-    public function sanitizeString($str)
+    private function sanitizeString($str)
     {
         $str = preg_replace('/[áàãâä]/ui', 'a', $str);
         $str = preg_replace('/[éèêë]/ui', 'e', $str);

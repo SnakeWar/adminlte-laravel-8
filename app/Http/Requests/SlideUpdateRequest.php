@@ -13,7 +13,7 @@ class SlideUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->can('update_slides');
     }
 
     /**

@@ -13,7 +13,7 @@ class SlideRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user()->can('create_slides');
     }
 
     /**

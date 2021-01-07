@@ -34,7 +34,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index', ['posts' => Post::paginate(10), 'title' => $this->title, 'subtitle' => $this->subtitle]);
+        return view('admin.posts.index', ['posts' => $this->post::paginate(10), 'title' => $this->title, 'subtitle' => $this->subtitle]);
     }
 
     /**

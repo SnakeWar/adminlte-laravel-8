@@ -92,16 +92,16 @@
             </div>
         </form>
     </div>
-    <div class="container p-5">
+    <div class="container-fluid p-5">
         <div class="row">
             @foreach($post->photos as $photo)
-                <div class="col-lg-3 col-6">
+                <div class="col-lg-4 col-6">
                     <form action="{{route('admin.post_photo_remove')}}" method="post">
                         @csrf
                         <input type="hidden" name="photoName" value="{{$photo->photo}}">
                         <button type="submit" class="btn btn-sm btn-danger my-2"><i class="fa fx fa-close">Remover</i></button>
                     </form>
-                    <img src="{{asset('storage/' . $photo->photo)}}" alt="" class="img-responsive w-25">
+                    <img src="{{asset('storage/' . $photo->photo)}}" alt="" class="img-responsive w-50">
 
                 </div>
             @endforeach
@@ -116,7 +116,7 @@
             min-height: 200px;
         }
     </style>
-    <script src="https://cdn.ckeditor.com/4.14.0/standard-all/ckeditor.js"></script>
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <script>
         // Note: in this sample we use CKEditor with two extra plugins:
         // - uploadimage to support pasting and dragging images,
@@ -127,8 +127,7 @@
             CKEDITOR.disableAutoInline = true;
             CKEDITOR.addCss('img {max-width:100%; height: auto;}');
             var editor = CKEDITOR.replace('editor1', {
-                extraPlugins: 'uploadimage,image2',
-                removePlugins: 'image',
+                extraPlugins: 'uploadimage',
                 height: 250
             });
         } else {

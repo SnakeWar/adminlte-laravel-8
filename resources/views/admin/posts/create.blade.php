@@ -7,12 +7,10 @@
     @section('title', $subtitle)
 @endsection
 @section('content')
-    <div class="container-fluid card">
-            <h1>
-                {{$title}}
-            </h1>
-        <hr>
-        <h3>{{$subtitle}}</h3>
+    <div class="container-fluid card card-outline card-primary">
+          <div class="card-header">
+              <h3 class="card-title">{{$subtitle}}</h3>
+          </div>
         <hr>
         <form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
 
@@ -103,11 +101,10 @@
             CKEDITOR.disableAutoInline = true;
             CKEDITOR.addCss( 'img {max-width:100%; height: auto;}' );
             var editor = CKEDITOR.replace( 'editor1', {
-                extraPlugins: 'uploadimage,image2',
-                removePlugins: 'image',
+                extraPlugins: 'uploadimage,image',
                 height:250
             } );
-            CKFinder.setupCKEditor( editor );
+
         } else {
             document.getElementById( 'editor1' ).innerHTML =
                 '<div class="tip-a tip-a-alert">This sample requires working Internet connection to load CKEditor 4 from CDN.</div>'

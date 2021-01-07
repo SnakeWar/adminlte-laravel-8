@@ -231,10 +231,16 @@ return [
     */
 
     'menu' => [
+        ['header' => 'Site'],
         [
             'text' => 'Dashboard',
             'url'  => 'admin',
             'icon' => 'fa fa-fw fa-folder-open'
+        ],
+        [
+            'text' => 'Slides',
+            'url'  => 'slides',
+            'icon' => 'fa fa-fw fa-image'
         ],
         [
             'text' => 'Postagem',
@@ -250,7 +256,7 @@ return [
 //            'label'       => 4,
   //          'label_color' => 'success',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'Configurações do Sistema'],
         [
             'text' => 'Usuários',
             'url'  => 'admin/users',
@@ -260,13 +266,13 @@ return [
         [
             'text' => 'Módulos',
             'url'  => 'admin/modules',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-fw fa-database',
             'can'  => 'read_modules',
         ],
         [
             'text'    => 'Grupos',
             'url'  => 'admin/roles',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-fw fa-lock',
             'can'  => 'read_roles',
 //            'submenu' => [
 //                [

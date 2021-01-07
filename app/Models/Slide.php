@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Slide extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['created_at', 'deleted_at', 'updated_at'];
+
+    public function photos()
+    {
+        return $this->hasMany(SlidePhotos::class);
+    }
 }

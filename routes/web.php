@@ -22,6 +22,7 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function (){
         Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+        Route::resource('slides', App\Http\Controllers\Admin\SlideController::class);
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
         Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
         Route::resource('users', App\Http\Controllers\Admin\UserController::class);

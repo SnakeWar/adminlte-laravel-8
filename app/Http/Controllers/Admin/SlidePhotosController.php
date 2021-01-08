@@ -19,10 +19,10 @@ class SlidePhotosController extends Controller
         }
         //removo a imagem do banco
         $removePhoto = SlidePhotos::where('photo', $photoName);
-        $Slideid = $removePhoto->first()->post_id;
+        $Slideid = $removePhoto->first()->slide_id;
         $removePhoto->delete();
 
-        return redirect()->route('admin.slide.edit', ['slide' => $Slideid])->withSuccess('Removido com sucesso!');
+        return redirect()->route('admin.slides.edit', ['slide' => $Slideid])->withSuccess('Removido com sucesso!');
 
     }
 }

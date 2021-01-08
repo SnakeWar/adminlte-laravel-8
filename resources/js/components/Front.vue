@@ -18,11 +18,25 @@
             </div>
             <!-- /.col-lg-3 -->
             <div class="col-lg-9">
-                <carousel :autoplay="true" :nav="true">
-                    <template slot="prev"><span class="prev">prev</span></template>
-                    <img class="img-fluid w-25" v-bind:src="/storage/ + img.photo" v-for="(img, index) in images">
-                    <template slot="next"><span class="next">next</span></template>
-                </carousel>
+                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" v-for="(item, index) in images" :key="index" data-slide-to=":key" v-bind:class="[index==0 ? 'active' : '']"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item" v-for="(item, index) in images" v-bind:class="[index==0 ? 'active' : '']">
+                            <img class="d-block img-fluid" v-bind:src="/storage/ + item.photo" alt="">
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <hr>
                 <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>
                 <div class="row p-5 justify-content-center">
                     <div class="" :class="{'loading' : loading}">
@@ -63,9 +77,6 @@
 <script>
 export default {
     name: "Front",
-    props: {
-      msg: String
-    },
     data: function () {
         return {
             categories: [],

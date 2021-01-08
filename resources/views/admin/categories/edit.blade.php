@@ -53,7 +53,7 @@
 
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary">
                         Atualizar Categoria
                     </button>
                 </div>

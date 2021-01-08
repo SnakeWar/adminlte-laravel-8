@@ -38,16 +38,16 @@
                 </div>
                 <hr>
                 <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>
-                <div class="row p-5 justify-content-center">
+                <div class="row justify-content-center">
                     <div class="" :class="{'loading' : loading}">
                     </div>
 
-                    <div class="col-lg-4 col-md-6 mb-4" v-for="post in posts">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="post in posts">
                         <div class="card h-100">
-                            <a href="#"><img class="card-img-top" v-bind:src="/storage/ + post.photo" alt=""></a>
+                            <img class="card-img-top" v-bind:src="/storage/ + post.photo" alt="">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a v-bind:href="/post/ + post.slug">{{ post.title }}</a>
+                                    <a class="stretched-link" v-bind:href="/postagem/ + post.slug">{{ post.title }}</a>
                                 </h4>
 <!--                                <h5>$24.99</h5>-->
                                 <p class="card-text">{{ post.description }}</p>

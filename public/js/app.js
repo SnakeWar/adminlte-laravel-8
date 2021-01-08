@@ -38412,35 +38412,42 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "row p-5 justify-content-center" },
+            { staticClass: "row justify-content-center" },
             [
               _c("div", { class: { loading: _vm.loading } }),
               _vm._v(" "),
               _vm._l(_vm.posts, function(post) {
-                return _c("div", { staticClass: "col-lg-4 col-md-6 mb-4" }, [
-                  _c("div", { staticClass: "card h-100" }, [
-                    _c("a", { attrs: { href: "#" } }, [
+                return _c(
+                  "div",
+                  { staticClass: "col-lg-4 col-md-6 col-sm-12 mb-4" },
+                  [
+                    _c("div", { staticClass: "card h-100" }, [
                       _c("img", {
                         staticClass: "card-img-top",
                         attrs: { src: /storage/ + post.photo, alt: "" }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h4", { staticClass: "card-title" }, [
-                        _c("a", { attrs: { href: /post/ + post.slug } }, [
-                          _vm._v(_vm._s(post.title))
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "stretched-link",
+                              attrs: { href: /postagem/ + post.slug }
+                            },
+                            [_vm._v(_vm._s(post.title))]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(_vm._s(post.description))
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v(_vm._s(post.description))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(2, true)
-                  ])
-                ])
+                      _vm._m(2, true)
+                    ])
+                  ]
+                )
               })
             ],
             2

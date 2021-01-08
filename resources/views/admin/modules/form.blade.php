@@ -58,7 +58,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">Enviar</button>
+                    <button type="submit" class="btn btn-block btn-lg btn-primary">Enviar</button>
                 </div>
             </form>
         </div>

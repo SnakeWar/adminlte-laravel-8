@@ -87,7 +87,7 @@
                 </div>
 
                 <div class="form-group mt-5">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary">
                         Atualizar
                     </button>
                 </div>

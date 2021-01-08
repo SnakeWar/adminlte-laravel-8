@@ -12,10 +12,10 @@
                 Editar {{$title}}
             </h1>
         </div>
-        @include('flash::message')
-
         <div class="card-body">
-            <form action="{{route('admin.slides.update', ['slide' => $slide->id])}}" method="post"
+            @include('flash::message')
+            <form action="{{route('admin.slides.update', ['slide' => $slide->id])}}"
+                  method="post"
                   enctype="multipart/form-data">
                 @csrf
                 @method("PUT")
@@ -50,7 +50,7 @@
                     @enderror
                 </div>
                 <div class="form-group mt-5">
-                    <button type="submit" class="btn btn-block btn-lg btn-success">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary">
                         Atualizar
                     </button>
                 </div>
@@ -83,7 +83,7 @@
     {{--        })--}}
     {{--    </script>--}}
     <script>
-        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        $('div.alert').delay(1000).fadeOut(350);
     </script>
 @endsection
 @section('dropify_js')

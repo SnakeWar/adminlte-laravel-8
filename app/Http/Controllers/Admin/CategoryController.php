@@ -76,7 +76,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = $this->category->findOrFail($id);
-        return view('admin.categories.edit', ['category' => $category]);
+        return view('admin.categories.edit', ['category' => $category, 'title' => $this->title]);
     }
 
     /**

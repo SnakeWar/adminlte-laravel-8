@@ -1,7 +1,11 @@
 @extends('adminlte::page')
 @section('css')
-
-    @endsection
+    <style>
+        .table .action{
+            text-align: center;
+        }
+    </style>
+@endsection
 @section('title_prefix', 'Admin - ')
 @section('title', $title)
 @section('content')
@@ -15,7 +19,7 @@
         @include('flash::message')
         <a href="{{route('admin.posts.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i> {{$subtitle}}</a>
         @if($posts)
-        <table id="myTable" class="table table-bordered table-striped data-table">
+        <table id="myTable" class="table table-bordered table-striped data-table table-responsive-sm">
             <thead>
             <th>#</th>
             <th>Título</th>
@@ -32,13 +36,13 @@
                     <td>
                         {{$post->title}}
                     </td>
-                    <td >
+                    <td class="text-center">
                         <img src="{{asset("storage/$post->photo")}}" class="img-fluid w-25" alt="">
                     </td>
                     <td>
                         {{$post->user->name}}
                     </td>
-                    <td>
+                    <td class="action">
                         <div class="btn-group">
                             <a href="{{route('admin.posts.edit', [$post->id])}}" class="btn btn-sm btn-primary"><i style="color: white" class="fa fa-pencil-alt"></i></a>
                             <form action="{{route('admin.posts.destroy', [$post->id])}}" method="post">

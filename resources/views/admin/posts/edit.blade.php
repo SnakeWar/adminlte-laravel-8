@@ -87,7 +87,7 @@
                 </div>
 
                 <div class="form-group mt-5">
-                    <button type="submit" class="btn -btn-lg btn-success">
+                    <button type="submit" class="btn btn-block btn-lg btn-success">
                         Atualizar
                     </button>
                 </div>
@@ -97,7 +97,7 @@
     <div class="container-fluid p-5">
         <div class="row">
             @foreach($post->photos as $photo)
-                <div class="col-lg-4 col-6">
+                <div class="col-lg-4 col-6 text-center">
                     <form action="{{route('admin.post_photo_remove')}}" method="post">
                         @csrf
                         <input type="hidden" name="photoName" value="{{$photo->photo}}">

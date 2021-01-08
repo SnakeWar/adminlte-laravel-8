@@ -7,52 +7,52 @@
     @section('title', $subtitle)
 @endsection
 @section('content')
-    <div class="container-fluid card">
-            <h1>
-                {{$title}}
-            </h1>
-        <hr>
-        <h3>{{$subtitle}}</h3>
-        <hr>
-        <form action="{{route('admin.slides.store')}}" method="post" enctype="multipart/form-data">
+    <div class="card card-outline card-primary">
+      <div class="card-header">
+          <h1 class="card-title text">{{$subtitle}}</h1>
+      </div>
 
-            @csrf
+        <div class="card-body">
+            <form action="{{route('admin.slides.store')}}" method="post" enctype="multipart/form-data">
 
-            <div class="form-group">
-                <label for="">Título</label>
-                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}">
-                @error('title')
-                <div class="invalid-feedback">
-                    {{$message}}
+                @csrf
+
+                <div class="form-group">
+                    <label for="">Título</label>
+                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}">
+                    @error('title')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
 
-            <div class="form-group">
-                <label for="">Descrição</label>
-                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{old('description')}}">
-                @error('description')
-                <div class="invalid-feedback">
-                    {{$message}}
+                <div class="form-group">
+                    <label for="">Descrição</label>
+                    <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{old('description')}}">
+                    @error('description')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
-            {{--        <div class="form-group">--}}
-            {{--            <label for="">Preço</label>--}}
-            {{--            <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{old('price')}}">--}}
-            {{--            @error('price')--}}
-            {{--            <div class="invalid-feedback">--}}
-            {{--                {{$message}}--}}
-            {{--            </div>--}}
-            {{--            @enderror--}}
-            {{--        </div>--}}
-            <div class="form-group">
-                <button type="submit" class="btn-block btn-lg btn-success">
-                    Criar
-                </button>
-            </div>
+                {{--        <div class="form-group">--}}
+                {{--            <label for="">Preço</label>--}}
+                {{--            <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{old('price')}}">--}}
+                {{--            @error('price')--}}
+                {{--            <div class="invalid-feedback">--}}
+                {{--                {{$message}}--}}
+                {{--            </div>--}}
+                {{--            @enderror--}}
+                {{--        </div>--}}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-block btn-lg btn-success">
+                        Criar
+                    </button>
+                </div>
 
-        </form>
+            </form>
+        </div>
     </div>
 @endsection
 @section('scripts')

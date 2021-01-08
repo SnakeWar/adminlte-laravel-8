@@ -1,5 +1,12 @@
 @extends('adminlte::page')
 @section('title_prefix', 'Admin - ')
+@section('css')
+    <style>
+        .table .action{
+            text-align: center;
+        }
+    </style>
+@endsection
 @section('title', $title)
 @section('content')
         <div class="container-fluid">
@@ -11,7 +18,7 @@
             <hr>
             @include('flash::message')
             <a href="{{ route('admin.modules.create') }}" class="btn btn-primary mb-5"><i class="fa fa-plus"></i> {{$subtitle}}</a>
-            <table id="myTable" class="table table-bordered table-striped data-table">
+            <table id="myTable" class="table table-bordered table-striped data-table table-responsive-sm">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -28,11 +35,11 @@
                         <td>{{ $item->description }}</td>
                         <td class="action">
                             <div class="btn-group">
-                                <a href="{{ route('admin.modules.edit', $item->id) }}" class="btn btn-primary"><i class="fa fa-pencil-alt"></i></a>
+                                <a href="{{ route('admin.modules.edit', $item->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
                                 <form action="{{ route('admin.modules.destroy', $item->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button style="border-bottom-left-radius: 0;border-top-left-radius: 0" class="btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                                    <button style="border-bottom-left-radius: 0;border-top-left-radius: 0" class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i></button>
                                 </form>
                             </div>
                         </td>

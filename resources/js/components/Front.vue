@@ -18,32 +18,11 @@
             </div>
             <!-- /.col-lg-3 -->
             <div class="col-lg-9">
-                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
+                <carousel :autoplay="true" :nav="true">
+                    <template slot="prev"><span class="prev">prev</span></template>
+                    <img class="img-fluid w-25" v-bind:src="/storage/ + img.photo" v-for="(img, index) in images">
+                    <template slot="next"><span class="next">next</span></template>
+                </carousel>
                 <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>
                 <div class="row p-5 justify-content-center">
                     <div class="" :class="{'loading' : loading}">
@@ -73,20 +52,24 @@
 
         </div>
         <!-- /.row -->
-        <div class="row">
-            <div class="col-12">
-                <div id="instafeed"></div>
-            </div>
-        </div>
+<!--        <div class="row">-->
+<!--            <div class="col-12">-->
+<!--                <div id="instafeed"></div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
     <!-- /.container -->
 </template>
 <script>
 export default {
     name: "Front",
+    props: {
+      msg: String
+    },
     data: function () {
         return {
             categories: [],
+            images: [],
             posts: [],
             search_post: '',
             loading: true,
@@ -107,6 +90,7 @@ export default {
     mounted() {
         this.loadCategories();
         this.loadPosts();
+        this.loadSlides();
     },
     methods: {
         loadCategories: function () {
@@ -130,6 +114,14 @@ export default {
                 })
                 .catch(function (error){
                     console.log(error)
+                });
+        },
+        loadSlides: function () {
+            //Carregar imagens
+            axios.get('/api/slides')
+                .then(response => {
+                    console.log(response.data.data[0].photos)
+                    this.images = response.data.data[0].photos;
                 });
         },
         getCategory: function (category) {

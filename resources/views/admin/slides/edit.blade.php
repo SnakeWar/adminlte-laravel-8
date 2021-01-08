@@ -6,57 +6,61 @@
     <link rel="stylesheet" href="{{asset('dropify/fonts/dropify.ttf')}}">
 @endsection
 @section('content')
-    <div class="container-fluid card">
-        <h1>
-            Editar {{$title}}
-        </h1>
+    <div class="card card-outline card-primary">
+        <div class="card-header">
+            <h1 class="card-title">
+                Editar {{$title}}
+            </h1>
+        </div>
         @include('flash::message')
-        <hr>
-        <form action="{{route('admin.slides.update', ['slide' => $slide->id])}}" method="post"
-              enctype="multipart/form-data">
-            @csrf
-            @method("PUT")
-            <div class="form-group">
-                <label for="">Título</label>
-                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                       value="{{$slide->title}}">
-                @error('title')
-                <div class="invalid-feedback">
-                    {{$message}}
+
+        <div class="card-body">
+            <form action="{{route('admin.slides.update', ['slide' => $slide->id])}}" method="post"
+                  enctype="multipart/form-data">
+                @csrf
+                @method("PUT")
+                <div class="form-group">
+                    <label for="">Título</label>
+                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
+                           value="{{$slide->title}}">
+                    @error('title')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="">Descrição</label>
-                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                       value="{{$slide->description}}">
-                @error('description')
-                <div class="invalid-feedback">
-                    {{$message}}
+                <div class="form-group">
+                    <label for="">Descrição</label>
+                    <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
+                           value="{{$slide->description}}">
+                    @error('description')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="">Galeria</label>
-                <input type="file" class="dropify form-control @error('photos') is-invalid @enderror" name="photos[]"
-                       multiple>
-                @error('photos')
-                <div class="invalid-feedback">
-                    {{$message}}
+                <div class="form-group">
+                    <label for="">Galeria</label>
+                    <input type="file" class="dropify form-control @error('photos') is-invalid @enderror" name="photos[]"
+                           multiple>
+                    @error('photos')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
-                @enderror
-            </div>
-            <div class="form-group mt-5">
-                <button type="submit" class="btn -btn-lg btn-success">
-                    Atualizar
-                </button>
-            </div>
-        </form>
+                <div class="form-group mt-5">
+                    <button type="submit" class="btn btn-block btn-lg btn-success">
+                        Atualizar
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="container-fluid p-5">
+    <div class="container-fluid">
         <div class="row">
             @foreach($slide->photos as $photo)
-                <div class="col-lg-4 col-6">
+                <div class="col-lg-4 col-6 text-center">
                     <form action="{{route('admin.slide_photo_remove')}}" method="post">
                         @csrf
                         <input type="hidden" name="photoName" value="{{$photo->photo}}">

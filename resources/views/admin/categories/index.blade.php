@@ -1,4 +1,11 @@
 @extends('adminlte::page')
+@section('css')
+    <style>
+        .table .action{
+            text-align: center;
+        }
+    </style>
+@endsection
 @section('title_prefix', 'Admin - ')
 @section('title', $title)
 @section('content')
@@ -12,7 +19,7 @@
         @include('flash::message')
         <a href="{{route('admin.categories.create')}}" class="btn btn-primary mb-5"><i class="fa fa-fw fa-plus"></i>{{$subtitle}}</a>
         @if($categories)
-            <table id="myTable" class="table table-bordered table-striped data-table">
+            <table id="myTable" class="table table-bordered table-striped data-table table-responsive-sm">
                 <thead>
                 <th>#</th>
                 <th>Nome</th>
@@ -31,7 +38,7 @@
                         <td>
                             {{$category->description}}
                         </td>
-                        <td>
+                        <td class="action">
                             <div class="btn-group">
                                 <a href="{{route('admin.categories.edit', ['category' => $category->id])}}" class="btn btn-sm btn-primary"><i style="color: white" class="fa fa-pencil-alt"></i></a>
                                 <form action="{{route('admin.categories.destroy', ['category' => $category->id])}}" method="post">

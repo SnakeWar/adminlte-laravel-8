@@ -78,7 +78,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn-block btn-lg btn-success">
+                    <button type="submit" class="btn btn-block btn-lg btn-success">
                         Criar Postagem
                     </button>
                 </div>

@@ -2,7 +2,7 @@
 @section('title_prefix', 'Admin - ')
 @section('title', $title)
 @section('content')
-    <div class="container-fluid card card-outline card-primary">
+    <div class="card card-outline card-primary">
         <div class="card-header">
             <h1 class="card-title">{{$subtitle}}</h1>
         </div>
@@ -31,7 +31,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn-block btn-lg btn-success">
+                    <button type="submit" class="btn btn-block btn-lg btn-success">
                         Criar Categoria
                     </button>
                 </div>

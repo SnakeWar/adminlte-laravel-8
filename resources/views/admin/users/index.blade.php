@@ -40,7 +40,7 @@
                             </td>
                             <td class="action">
                                 <div class="btn-group">
-                                    <a href="{{route('admin.users.edit', [$role->id])}}" class="btn btn-sm btn-primary"><i style="color: white" class="fa fa-pencil-alt"></i></a>
+                                    <a href="{{route('admin.users.edit', [$role->id])}}" class="btn btn-app"><i class="fa fa-edit"></i>Editar</a>
                                     <form action="{{route('admin.users.destroy', [$role->id])}}" method="post">
                                         @csrf
                                         @method("DELETE")

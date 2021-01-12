@@ -52,14 +52,11 @@
                         </td>
                         <td class="action">
                             <div class="btn-group">
-                                <a href="{{route('admin.slides.edit', [$slide->id])}}" class="btn btn-sm btn-primary"><i
-                                        style="color: white" class="fa fa-pencil-alt"></i></a>
+                                <a href="{{route('admin.slides.edit', [$slide->id])}}" class="btn btn-app"><i class="fa fa-edit"></i>Editar</a>
                                 <form action="{{route('admin.slides.destroy', [$slide->id])}}" method="post">
                                     @csrf
                                     @method("DELETE")
-                                    <button type="submit" class="btn btn-sm btn-danger"
-                                            style="border-bottom-left-radius: 0;border-top-left-radius: 0"><i
-                                            class="fa fa-fw fa-trash" style="color: white"></i></button>
+                                    <button type="submit" class="btn btn-app" style="border-bottom-left-radius: 0;border-top-left-radius: 0"><i class="fa fa-trash"></i>Excluir</button>
                                 </form>
                             </div>
                         </td>

@@ -50686,10 +50686,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('front-page', __webpack_require__(/*! ./components/Front.vue */ "./resources/js/components/Front.vue")["default"]);
-Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js")); // Vue.component('carousel', require('vue-owl-carousel'));
+Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js")); // Vue.component('InfiniteLoading', require('vue-infinite-loading'));
 
-Vue.component('Carousel', __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'vue-l-carousel'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
-Vue.component('CarouselItem', __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'vue-l-carousel'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 var app = new Vue({
   el: '#app'
 });

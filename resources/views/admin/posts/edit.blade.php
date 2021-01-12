@@ -6,12 +6,16 @@
     <link rel="stylesheet" href="{{asset('dropify/fonts/dropify.ttf')}}">
 @endsection
 @section('content')
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.home') }}" class="pr-1"><i class="fa fa-address-card"></i> Home /</a></li>
+        <li><a href="{{ route('admin.posts.index') }}" class="pr-1"> {{$title}} /</a></li>
+        <li class="active"> Editar</li>
+    </ol>
     <div class="card card-outline card-primary">
         <div class="card-header">
             <h1 class="card-title">Editar {{$title}}</h1>
         </div>
         @include('flash::message')
-        <hr>
 
         <div class="card-body">
             <form action="{{route('admin.posts.update', ['post' => $post->id])}}" method="post"

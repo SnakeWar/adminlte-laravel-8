@@ -2,6 +2,11 @@
 @section('title_prefix', 'Admin - ')
 @section('title', $title)
 @section('content')
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.home') }}" class="pr-1"><i class="fa fa-address-card"></i> Home /</a></li>
+        <li><a href="{{ route('admin.users.index') }}" class="pr-1"> {{$title}} /</a></li>
+        <li class="active"> {{isset($user) ? 'Editar' : 'Criar'}}</li>
+    </ol>
         <div class="card card-outline card-primary">
             <div class="card-header">
                 <h1 class="card-title">{{$subtitle}}</h1>

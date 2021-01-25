@@ -50687,9 +50687,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('front-page', __webpack_require__(/*! ./components/Front.vue */ "./resources/js/components/Front.vue")["default"]);
 Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js")); // Vue.component('carousel', require('vue-owl-carousel'));
+// Vue.component('Carousel', require('vue-l-carousel'));
+// Vue.component('CarouselItem', require('vue-l-carousel'));
 
-Vue.component('Carousel', __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'vue-l-carousel'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
-Vue.component('CarouselItem', __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module 'vue-l-carousel'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
 var app = new Vue({
   el: '#app'
 });
@@ -50828,8 +50828,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\adminlte-laravel-8\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\adminlte-laravel-8\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\xampp\htdocs\adminlte-laravel-8\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\xampp\htdocs\adminlte-laravel-8\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

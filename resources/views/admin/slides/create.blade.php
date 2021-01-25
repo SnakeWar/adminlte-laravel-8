@@ -26,16 +26,6 @@
                     </div>
                     @enderror
                 </div>
-
-                <div class="form-group">
-                    <label for="">Descrição</label>
-                    <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{old('description')}}">
-                    @error('description')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                    @enderror
-                </div>
                 {{--        <div class="form-group">--}}
                 {{--            <label for="">Preço</label>--}}
                 {{--            <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{old('price')}}">--}}

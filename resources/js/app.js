@@ -6,7 +6,8 @@ window.Vue = require('vue');
 
 Vue.component('front-page', require('./components/Front.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
-// Vue.component('InfiniteLoading', require('vue-infinite-loading'));
+Vue.component('InfiniteLoading', require('vue-infinite-loading'));
+// Vue.component('MugenScroll ', require('vue-mugen-scroll'));
 
 
 const app = new Vue({

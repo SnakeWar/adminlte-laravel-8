@@ -37,7 +37,7 @@
                     </a>
                 </div>
                 <hr>
-                <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>
+
                 <div class="row justify-content-center">
                     <div class="" :class="{'loading' : loading}">
                     </div>
@@ -57,7 +57,11 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-lg-12 text-center my-5">
+                        <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>
+<!--                        <infinite-loading @distance="1" @infinite="handleLoadMore"></infinite-loading>-->
+                        <button v-if="this.loadmoreButton == true" class="btn btn-primary" v-on:click="handleLoadMore">Carregar Mais</button>
+                    </div>
                 </div>
                 <!-- /.row -->
 
@@ -87,7 +91,9 @@ export default {
             page: 1,
             isActive: 0,
             activeClass: 'active',
-            laravelData: {}
+            laravelData: {},
+            last_page: 2,
+            loadmoreButton: true
         }
     },
     // computed: {
@@ -119,6 +125,7 @@ export default {
             axios.get('/api/posts?page='+ page)
                 .then((response) => {
                     this.isActive = 0
+                    this.page = 2;
                     this.posts = response.data.data
                     this.laravelData = response.data
                     this.loading = false
@@ -131,14 +138,16 @@ export default {
             //Carregar imagens
             axios.get('/api/slides')
                 .then(response => {
-                    console.log(response.data.data[0].photos)
+                    //console.log(response.data.data[0].photos)
                     this.images = response.data.data[0].photos;
                 });
         },
         getCategory: function (category) {
             axios.get('/api/post/' + category)
                 .then((response) => {
+                    this.loadmoreButton = false
                     this.isActive = category
+                    console.log(this.isActive)
                     this.posts = response.data.data[0].posts
 
                 })
@@ -150,13 +159,33 @@ export default {
             console.log(evt)
             axios.get('/api/post_search/' + evt)
                 .then((response) => {
-                    console.log(response)
+                    //console.log(response)
                     this.isActive = -1
                     this.posts = response.data.data
                 })
                 .catch(function (error){
                     console.log(error)
                 });
+        },
+        handleLoadMore: function () {
+
+            axios.get('/api/posts?page=' + this.page)
+                .then(res => {
+                    //console.log(res.data.meta.current_page);
+                $.each(res.data.data, (key, value) => {
+                    this.posts.push(value);
+                });
+                this.last_page = res.data.meta.last_page;
+                console.log(this.page)
+                //if(this.page == this.last_page) this.isActive = 99999999
+            });
+            if(this.page <= this.last_page){
+                this.page = this.page + 1;
+                if(this.page == this.last_page){
+                    this.loadmoreButton = false
+                }
+            }
+
         },
     }
 }

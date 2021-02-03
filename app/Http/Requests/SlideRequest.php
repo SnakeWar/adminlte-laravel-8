@@ -25,7 +25,6 @@ class SlideRequest extends FormRequest
     {
         return [
             'title'         => 'required',
-            'description'         => 'required',
         ];
     }
     public function messages()

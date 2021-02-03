@@ -35,16 +35,6 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="">Descrição</label>
-                    <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                           value="{{$slide->description}}">
-                    @error('description')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                    @enderror
-                </div>
-                <div class="form-group">
                     <label for="">Galeria</label>
                     <input type="file" class="dropify form-control @error('photos') is-invalid @enderror" name="photos[]"
                            multiple>

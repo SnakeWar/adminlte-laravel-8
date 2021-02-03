@@ -2036,6 +2036,7 @@ __webpack_require__.r(__webpack_exports__);
       //Carregar postagens
       axios.get('/api/posts?page=' + page).then(function (response) {
         _this2.isActive = 0;
+        _this2.loadmoreButton = true;
         _this2.page = 2;
         _this2.posts = response.data.data;
         _this2.laravelData = response.data;

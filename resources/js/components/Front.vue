@@ -125,6 +125,7 @@ export default {
             axios.get('/api/posts?page='+ page)
                 .then((response) => {
                     this.isActive = 0
+                    this.loadmoreButton = true
                     this.page = 2;
                     this.posts = response.data.data
                     this.laravelData = response.data

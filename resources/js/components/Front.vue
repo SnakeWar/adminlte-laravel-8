@@ -39,9 +39,8 @@
                 <hr>
 
                 <div class="row justify-content-center">
-                    <div class="" :class="{'loading' : loading}">
+                    <div :class="{'loading' : loading}">
                     </div>
-
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="post in posts">
                         <div class="card h-100">
                             <img class="card-img-top" v-bind:src="/storage/ + post.photo" alt="">
@@ -58,9 +57,9 @@
                         </div>
                     </div>
                     <div class="col-lg-12 text-center my-5">
-                        <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>
+<!--                        <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>-->
 <!--                        <infinite-loading @distance="1" @infinite="handleLoadMore"></infinite-loading>-->
-                        <button v-if="this.loadmoreButton == true" class="btn btn-primary" v-on:click="handleLoadMore">Carregar Mais</button>
+                        <button v-if="loadmoreButton == true" class="btn btn-primary" v-on:click="handleLoadMore">Carregar Mais</button>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -182,11 +181,10 @@ export default {
             });
             if(this.page <= this.last_page){
                 this.page = this.page + 1;
-                if(this.page == this.last_page){
-                    this.loadmoreButton = false
-                }
             }
-
+            if(this.page == this.last_page){
+                this.loadmoreButton = false
+            }
         },
     }
 }

@@ -1987,7 +1987,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Front",
   data: function data() {
@@ -2092,10 +2091,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.page <= this.last_page) {
         this.page = this.page + 1;
+      }
 
-        if (this.page == this.last_page) {
-          this.loadmoreButton = false;
-        }
+      if (this.page == this.last_page) {
+        this.loadmoreButton = false;
       }
     }
   }
@@ -38471,31 +38470,18 @@ var render = function() {
               )
             }),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-12 text-center my-5" },
-              [
-                _vm.isActive == 0
-                  ? _c("pagination", {
-                      staticClass: "col-12 justify-content-center",
-                      attrs: { data: _vm.laravelData },
-                      on: { "pagination-change-page": _vm.loadPosts }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                this.loadmoreButton == true
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        on: { click: _vm.handleLoadMore }
-                      },
-                      [_vm._v("Carregar Mais")]
-                    )
-                  : _vm._e()
-              ],
-              1
-            )
+            _c("div", { staticClass: "col-lg-12 text-center my-5" }, [
+              _vm.loadmoreButton == true
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: { click: _vm.handleLoadMore }
+                    },
+                    [_vm._v("Carregar Mais")]
+                  )
+                : _vm._e()
+            ])
           ],
           2
         )

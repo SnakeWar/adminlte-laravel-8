@@ -20,8 +20,8 @@
         </ol>
         <hr>
         @include('flash::message')
-        <a href="{{route('admin.slides.create')}}" class="btn btn-primary mb-5"><i
-                class="fa fa-fw fa-plus"></i> {{$subtitle}}</a>
+        <a href="{{route('admin.slides.create')}}" class="btn btn-app mb-5"><i
+                class="fa fa-fw fa-plus m-auto"></i> {{$subtitle}}</a>
         @if($slides)
             <table id="myTable" class="table table-bordered table-striped data-table table-responsive-sm">
                 <thead>
@@ -52,8 +52,8 @@
                         </td>
                         <td class="action">
                             <div class="btn-group">
-                                <a href="{{route('admin.slides.edit', [$slide->id])}}" class="btn btn-app"><i class="fa fa-edit"></i>Editar</a>
-                                <form action="{{route('admin.slides.destroy', [$slide->id])}}" method="post">
+                                <a href="{{route($admin . '.edit', [$slide->id])}}" class="btn btn-app"><i class="fa fa-edit"></i>Editar</a>
+                                <form action="{{route($admin . '.destroy', [$slide->id])}}" method="post">
                                     @csrf
                                     @method("DELETE")
                                     <button type="submit" class="btn btn-app" style="border-bottom-left-radius: 0;border-top-left-radius: 0"><i class="fa fa-trash"></i>Excluir</button>

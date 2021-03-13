@@ -19,9 +19,9 @@ Route::get('/postagem/{slug}', [App\Http\Controllers\Pages\PagesController::clas
 
 Auth::routes();
 
-Route::middleware('auth')->group(function () {
-    Route::prefix('admin')->name('admin.')->group(function (){
-        Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+
+        Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
         Route::resource('slides', App\Http\Controllers\Admin\SlideController::class)->middleware('can:read_slides');
         Route::resource('posts', App\Http\Controllers\Admin\PostController::class)->middleware('can:read_posts');
         Route::resource('roles', App\Http\Controllers\Admin\RoleController::class)->middleware('can:read_roles');
@@ -31,5 +31,4 @@ Route::middleware('auth')->group(function () {
 
         Route::post('post_photo/remove', [App\Http\Controllers\Admin\PostPhotosController::class, 'removePhoto'])->name('post_photo_remove')->middleware('can:delete_slides');
         Route::post('slide_photo/remove', [App\Http\Controllers\Admin\SlidePhotosController::class, 'removePhoto'])->name('slide_photo_remove')->middleware('can:delete_posts');
-    });
 });

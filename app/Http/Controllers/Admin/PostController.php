@@ -24,7 +24,10 @@ class PostController extends Controller
         $this->post = $post;
         $this->category = $category;
         $this->title = 'Postagens';
-        $this->subtitle = 'Adicionar Postagem';
+        $this->subtitle = 'Postagem';
+        $this->middleware('auth');
+        $this->admin = 'admin.posts';
+        $this->view = 'posts';
     }
 
     /**
@@ -34,7 +37,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index', ['posts' => $this->post::paginate(10), 'title' => $this->title, 'subtitle' => $this->subtitle]);
+        return view($this->admin . '.index', [
+            'posts' => $this->post::paginate(10),
+            'title' => $this->title,
+            'subtitle' => $this->subtitle,
+            'admin' => $this->admin
+        ]);
     }
 
     /**
@@ -45,7 +53,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = $this->category->all();
-        return view('admin.posts.create', ['categories' => $categories, 'title' => $this->title, 'subtitle'=> $this->subtitle]);
+        return view($this->admin . '.create', ['categories' => $categories, 'title' => $this->title, 'subtitle'=> $this->subtitle]);
     }
 
     /**
@@ -69,8 +77,8 @@ class PostController extends Controller
         $post = $this->post->create($data);
 
         $post->categories()->sync($categories);
-        flash('Postagem Criada com Sucesso!')->success();
-        return redirect()->route('admin.posts.index');
+        flash($this->subtitle . ' Criada com Sucesso!')->success();
+        return redirect()->route($this->admin . '.index');
 
     }
 
@@ -96,7 +104,7 @@ class PostController extends Controller
         $categories = $this->category->all();
         $post = $this->post::with('photos')->findOrFail($id);
         //dd($post);
-        return view('admin.posts.edit', ['post' => $post, 'categories' => $categories, 'title' => $this->title]);
+        return view($this->admin . '.edit', ['post' => $post, 'categories' => $categories, 'title' => $this->title]);
     }
 
     /**
@@ -132,8 +140,8 @@ class PostController extends Controller
             return redirect()->back();
         }
 
-        flash('Postagem Atualizada com Sucesso!')->success();
-        return redirect()->route('admin.posts.index');
+        flash($this->subtitle . ' Atualizada com Sucesso!')->success();
+        return redirect()->route($this->admin . '.index');
     }
 
     /**
@@ -147,7 +155,7 @@ class PostController extends Controller
         $post = $this->post->find($id);
         $post->delete();
 
-        flash('Postagem Removida com Sucesso!')->success();
-        return redirect()->route('admin.posts.index');
+        flash($this->subtitle . ' Removida com Sucesso!')->success();
+        return redirect()->route($this->admin . '.index');
     }
 }

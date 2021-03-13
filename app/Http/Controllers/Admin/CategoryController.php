@@ -17,7 +17,10 @@ class CategoryController extends Controller
     {
         $this->category = $category;
         $this->title = 'Categorias';
-        $this->subtitle = 'Adicionar Categoria';
+        $this->subtitle = 'Categoria';
+        $this->middleware('auth');
+        $this->admin = 'admin.categories';
+        $this->view = 'categories';
     }
 
     /**
@@ -27,7 +30,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.index', ['categories' => $this->category->paginate(10), 'title' => $this->title, 'subtitle' => $this->subtitle]);
+        return view($this->admin . '.index', [
+            'categories' => $this->category->paginate(10),
+            'title' => $this->title,
+            'subtitle' => $this->subtitle,
+            'admin' => $this->admin
+        ]);
     }
 
     /**
@@ -37,7 +45,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create',['title' => $this->title, 'subtitle' => $this->subtitle]);
+        return view($this->admin . '.create',['title' => $this->title, 'subtitle' => $this->subtitle]);
     }
 
     /**
@@ -52,8 +60,8 @@ class CategoryController extends Controller
 
         $category = $this->category->create($data);
 
-        flash('Categoria Criada com Sucesso!')->success();
-        return redirect()->route('admin.categories.index');
+        flash($this->subtitle . ' Criada com Sucesso!')->success();
+        return redirect()->route($this->admin . '.index');
     }
 
     /**
@@ -76,7 +84,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = $this->category->findOrFail($id);
-        return view('admin.categories.edit', ['category' => $category, 'title' => $this->title]);
+        return view($this->admin . '.edit', ['category' => $category, 'title' => $this->title]);
     }
 
     /**
@@ -93,8 +101,8 @@ class CategoryController extends Controller
         $category = $this->category->find($id);
         $category->update($data);
 
-        flash('Categoria Atualizada com Sucesso!')->success();
-        return redirect()->route('admin.categories.index');
+        flash($this->subtitle . ' Atualizada com Sucesso!')->success();
+        return redirect()->route($this->admin . '.index');
     }
 
     /**
@@ -108,7 +116,7 @@ class CategoryController extends Controller
         $category = $this->category->findOrFail($id);
         $category->delete();
 
-        flash('Categoria Removida com Sucesso!')->success();
-        return redirect()->route('admin.categories.index');
+        flash($this->subtitle . ' Removida com Sucesso!')->success();
+        return redirect()->route($this->admin . '.index');
     }
 }

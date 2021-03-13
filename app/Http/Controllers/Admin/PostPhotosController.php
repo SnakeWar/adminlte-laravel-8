@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class PostPhotosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function removePhoto(Request $request){
 
         $photoName = $request->get('photoName');

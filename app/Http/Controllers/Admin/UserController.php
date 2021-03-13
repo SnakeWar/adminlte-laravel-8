@@ -18,6 +18,7 @@ class UserController extends Controller
     {
         $this->user = $user;
         $this->title = 'Usuários';
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.

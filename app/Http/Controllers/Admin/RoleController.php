@@ -17,6 +17,7 @@ class RoleController extends Controller
     {
         $this->role = $role;
         $this->title = 'Grupos';
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.

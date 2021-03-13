@@ -19,7 +19,10 @@ class SlideController extends Controller
     {
         $this->slide = $slide;
         $this->title = 'Slides';
-        $this->subtitle = 'Adicionar Slide';
+        $this->subtitle = 'Slide';
+        $this->middleware('auth');
+        $this->admin = 'admin.slides';
+        $this->view = 'slides';
     }
 
     /**
@@ -29,7 +32,12 @@ class SlideController extends Controller
      */
     public function index()
     {
-        return view('admin.slides.index', ['slides' => $this->slide::paginate(10), 'title' => $this->title, 'subtitle' => $this->subtitle]);
+        return view($this->admin . '.index', [
+            'slides' => $this->slide::paginate(10),
+            'title' => $this->title,
+            'subtitle' => $this->subtitle,
+            'admin' => $this->admin
+        ]);
     }
 
     /**
@@ -39,7 +47,7 @@ class SlideController extends Controller
      */
     public function create()
     {
-        return view('admin.slides.create', ['title' => $this->title, 'subtitle'=> $this->subtitle]);
+        return view($this->admin . '.create', ['title' => $this->title, 'subtitle'=> $this->subtitle]);
     }
 
     /**
@@ -58,8 +66,8 @@ class SlideController extends Controller
 
         $slide = $this->slide->create($data);
 
-        flash('Dado Criado com Sucesso!')->success();
-        return redirect()->route('admin.slides.index');
+        flash($this->subtitle . ' Criado com Sucesso!')->success();
+        return redirect()->route($this->admin . '.index');
 
     }
 
@@ -84,7 +92,7 @@ class SlideController extends Controller
     {
         $slide = $this->slide::with('photos')->findOrFail($id);
         //dd($slide);
-        return view('admin.slides.edit', ['slide' => $slide, 'title' => $this->subtitle]);
+        return view($this->admin . '.edit', ['slide' => $slide, 'title' => $this->subtitle]);
     }
 
     /**
@@ -116,7 +124,7 @@ class SlideController extends Controller
             return redirect()->back();
         }
 
-        flash('Dado Atualizado com Sucesso!')->success();
+        flash($this->subtitle . ' Atualizado com Sucesso!')->success();
         return redirect()->route('admin.slides.index');
     }
 
@@ -131,7 +139,7 @@ class SlideController extends Controller
         $slide = $this->slide->find($id);
         $slide->delete();
 
-        flash('Dado Removido com Sucesso!')->success();
-        return redirect()->route('admin.slides.index');
+        flash($this->subtitle . ' Removido com Sucesso!')->success();
+        return redirect()->route($this->admin . '.index');
     }
 }

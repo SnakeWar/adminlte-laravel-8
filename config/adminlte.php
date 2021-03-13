@@ -234,7 +234,7 @@ return [
         ['header' => 'Site'],
         [
             'text' => 'Dashboard',
-            'url'  => 'admin',
+            'url'  => 'admin/home',
 
             'icon' => 'fa fa-fw fa-folder-open'
         ],

@@ -19,6 +19,7 @@ class ModuleController extends Controller
         $this->module = $module;
         $this->title = 'Módulos';
         $this->subtitle = 'Adicionar Módulo';
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.

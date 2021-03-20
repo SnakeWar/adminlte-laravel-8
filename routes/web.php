@@ -32,3 +32,9 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::post('post_photo/remove', [App\Http\Controllers\Admin\PostPhotosController::class, 'removePhoto'])->name('post_photo_remove')->middleware('can:delete_slides');
         Route::post('slide_photo/remove', [App\Http\Controllers\Admin\SlidePhotosController::class, 'removePhoto'])->name('slide_photo_remove')->middleware('can:delete_posts');
 });
+
+Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
+    ->name('ckfinder_connector');
+
+Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
+    ->name('ckfinder_browser');

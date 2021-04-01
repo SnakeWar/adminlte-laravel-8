@@ -102,26 +102,11 @@
     <script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
     @include('ckfinder::setup')
     <script>
-        // Note: in this sample we use CKEditor with two extra plugins:
-        // - uploadimage to support pasting and dragging images,
-        // - image2 (instead of image) to provide images with captions.
-        // Additionally, the CSS style for the editing area has been slightly modified to provide responsive images during editing.
-        // All these modifications are not required by CKFinder, they just provide better user experience.
         if (typeof CKEDITOR !== 'undefined') {
-            //CKEDITOR.disableAutoInline = true;
+            CKEDITOR.disableAutoInline = true;
             CKEDITOR.addCss('img {max-width:100%; height: auto;}');
             var editor = CKEDITOR.replace('editor1', {
                 extraPlugins: 'uploadimage',
-                baseUrl: 'https://'
-                // ckfinder: {
-                //     uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json',
-                // },
-                //uploadImage : 'uploadimage',
-                //height: 250
-                // filebrowserBrowseUrl: '/ckfinder/ckfinder.html',
-                // filebrowserUploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-                // filebrowserWindowWidth: '1000',
-                // filebrowserWindowHeight: '700'
             });
         } else {
             document.getElementById('editor1').innerHTML =
@@ -129,7 +114,6 @@
         }
         CKFinder.setupCKEditor(editor);
     </script>
-    <script src="//cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js" type="text/javascript"></script>
 @stop
 @section('scripts')
     {{--    <script src="{{asset('assets/js/jquerymaskmoney/jquery.maskMoney.min.js')}}"></script>--}}

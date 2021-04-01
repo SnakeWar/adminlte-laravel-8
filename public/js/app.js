@@ -2035,11 +2035,11 @@ __webpack_require__.r(__webpack_exports__);
       //Carregar postagens
       axios.get('/api/posts?page=' + page).then(function (response) {
         _this2.isActive = 0;
-        _this2.loadmoreButton = true;
         _this2.page = 2;
         _this2.posts = response.data.data;
         _this2.laravelData = response.data;
         _this2.loading = false;
+        _this2.loadmoreButton = true; //console.log(this.posts.length)
       })["catch"](function (error) {
         console.log(error);
       });
@@ -38301,7 +38301,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-lg-3" }, [
         _c("h1", { staticClass: "my-4" }, [_vm._v("Loja Virtual")]),
@@ -50869,8 +50869,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\adminlte-laravel-8\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\adminlte-laravel-8\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\xampp\htdocs\adminlte-laravel-8\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\xampp\htdocs\adminlte-laravel-8\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

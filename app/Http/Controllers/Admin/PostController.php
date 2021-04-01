@@ -6,16 +6,16 @@ use App\Http\Requests\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Post;
+use App\Traits\UploadTraits;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
-use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    use UploadTrait;
+    use UploadTraits;
 
     private $post;
 
@@ -38,7 +38,7 @@ class PostController extends Controller
     public function index()
     {
         return view($this->admin . '.index', [
-            'posts' => $this->post::paginate(10),
+            'posts' => $this->post::with('user')->paginate(10),
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'admin' => $this->admin
@@ -66,10 +66,8 @@ class PostController extends Controller
     {
         $data = $request->all();
         $categories = $request->get('categories', null);
-        $user_id = Auth::id();
-        $data['user_id'] = $user_id;
+        $data['user_id'] = Auth::user()->id;
         //dd($data);
-
         if($request->hasFile('photo')){
             $data['photo'] = $this->imageUpload($request->file('photo'));
         }

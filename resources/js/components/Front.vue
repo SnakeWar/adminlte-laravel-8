@@ -1,6 +1,6 @@
 <template>
     <!-- Page Content -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3">
                 <h1 class="my-4">Loja Virtual</h1>
@@ -124,11 +124,12 @@ export default {
             axios.get('/api/posts?page='+ page)
                 .then((response) => {
                     this.isActive = 0
-                    this.loadmoreButton = true
                     this.page = 2;
                     this.posts = response.data.data
                     this.laravelData = response.data
                     this.loading = false
+                    this.loadmoreButton = true
+                    //console.log(this.posts.length)
                 })
                 .catch(function (error){
                     console.log(error)

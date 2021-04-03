@@ -33,7 +33,7 @@ class SlideController extends Controller
     public function index()
     {
         return view($this->admin . '.index', [
-            'slides' => $this->slide::paginate(10),
+            'slides' => $this->slide::with('photos')->paginate(10),
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'admin' => $this->admin

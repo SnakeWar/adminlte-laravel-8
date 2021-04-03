@@ -13,10 +13,10 @@ class PostController extends Controller
 {
     public function index()
     {
-        return PostResource::collection(Post::orderBy('created_at', 'desc')->paginate(6));
+        return PostResource::collection(Post::whereStatus(true)->orderBy('created_at', 'desc')->paginate(6));
     }
     public function post_search($post)
     {
-        return PostResource::collection(Post::where('title', 'like', '%' . $post . '%')->get());
+        return PostResource::collection(Post::whereStatus(true)->where('title', 'like', '%' . $post . '%')->get());
     }
 }

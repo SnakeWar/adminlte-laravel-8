@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3">
-                <h1 class="my-4">Loja Virtual</h1>
+                <h1 class="my-4">Notícias</h1>
                 <div class="list-group">
                     <input v-model="search_post" placeholder="Pesquise..." class="list-group-item mb-1" v-on:input="getPost(search_post)">
                 </div>
@@ -42,19 +42,15 @@
                     <div :class="{'loading' : loading}">
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="post in posts">
-                        <div class="card h-100">
-                            <img class="card-img-top" v-bind:src="/storage/ + post.photo" alt="">
+                        <div class="card">
+                            <img v-bind:src="/storage/ + post.photo" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h4 class="card-title">
-                                    <a class="stretched-link" v-bind:href="/postagem/ + post.slug">{{ post.title }}</a>
-                                </h4>
-<!--                                <h5>$24.99</h5>-->
+                                <h5 class="card-title">{{ post.title }}</h5>
                                 <p class="card-text">{{ post.description }}</p>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                <a class="stretched-link" v-bind:href="/postagem/ + post.slug"></a>
                             </div>
                         </div>
+
                     </div>
                     <div class="col-lg-12 text-center my-5">
 <!--                        <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>-->

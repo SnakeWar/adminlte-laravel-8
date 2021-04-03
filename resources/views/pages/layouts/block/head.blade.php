@@ -11,7 +11,9 @@
 
 <!-- Custom styles for this template -->
 <link href="{{asset('assets/css/shop-homepage.css')}}" rel="stylesheet">
-<link href="{{asset('assets/css/shop-homepage.css')}}" rel="stylesheet">
+<link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+<link href="{{asset('vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+
 <style>
     .loading {
         border: 16px solid #f3f3f3; /* Light grey */

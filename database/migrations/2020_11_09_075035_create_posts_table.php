@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->longText('body');
+            $table->boolean('status')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

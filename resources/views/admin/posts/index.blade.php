@@ -17,7 +17,7 @@
         </ol>
         <hr>
         @include('flash::message')
-        <a href="{{route($admin . '.create')}}" class="btn btn-app mb-5"><i
+        <a href="{{route($admin . '.create')}}" class="btn btn-outline-primary mb-5"><i
                 class="fa fa-fw fa-plus m-auto"></i> {{$subtitle}}</a>
         @if($posts)
             <table id="myTable" class="table table-bordered table-striped data-table table-responsive-sm">
@@ -45,14 +45,28 @@
                         </td>
                         <td class="action">
                             <div class="btn-group">
-                                <a href="{{route($admin . '.edit', [$post->id])}}" class="btn btn-app"><i
-                                        class="fa fa-edit"></i>Editar</a>
+                                <form action="{{route($admin . '.ativo', [$post->id])}}" method="post">
+                                    @csrf
+                                    @if($post->status == false)
+                                        <button type="submit" class="btn btn-danger"
+                                                style="border-bottom-right-radius: 0;border-top-right-radius: 0"><i
+                                                class="fa fa-minus"></i>
+                                        </button>
+                                    @else
+                                        <button type="submit" class="btn btn-success"
+                                                style="border-bottom-right-radius: 0;border-top-right-radius: 0"><i
+                                                class="fa fa-check"></i>
+                                        </button>
+                                    @endif
+                                </form>
+                                <a href="{{route($admin . '.edit', [$post->id])}}" class="btn btn-primary"><i
+                                        class="fa fa-edit"></i></a>
                                 <form action="{{route($admin . '.destroy', [$post->id])}}" method="post">
                                     @csrf
                                     @method("DELETE")
-                                    <button type="submit" class="btn btn-app"
+                                    <button type="submit" class="btn btn-danger"
                                             style="border-bottom-left-radius: 0;border-top-left-radius: 0"><i
-                                            class="fa fa-trash"></i>Excluir
+                                            class="fa fa-trash"></i>
                                     </button>
                                 </form>
                             </div>

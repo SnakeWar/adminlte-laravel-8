@@ -1983,10 +1983,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Front",
   data: function data() {
@@ -38304,7 +38300,7 @@ var render = function() {
   return _c("div", { staticClass: "container-fluid" }, [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-lg-3" }, [
-        _c("h1", { staticClass: "my-4" }, [_vm._v("Loja Virtual")]),
+        _c("h1", { staticClass: "my-4" }, [_vm._v("Notícias")]),
         _vm._v(" "),
         _c("div", { staticClass: "list-group" }, [
           _c("input", {
@@ -38441,30 +38437,26 @@ var render = function() {
                 "div",
                 { staticClass: "col-lg-4 col-md-6 col-sm-12 mb-4" },
                 [
-                  _c("div", { staticClass: "card h-100" }, [
+                  _c("div", { staticClass: "card" }, [
                     _c("img", {
                       staticClass: "card-img-top",
-                      attrs: { src: /storage/ + post.photo, alt: "" }
+                      attrs: { src: /storage/ + post.photo, alt: "..." }
                     }),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
-                      _c("h4", { staticClass: "card-title" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "stretched-link",
-                            attrs: { href: /postagem/ + post.slug }
-                          },
-                          [_vm._v(_vm._s(post.title))]
-                        )
+                      _c("h5", { staticClass: "card-title" }, [
+                        _vm._v(_vm._s(post.title))
                       ]),
                       _vm._v(" "),
                       _c("p", { staticClass: "card-text" }, [
                         _vm._v(_vm._s(post.description))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(2, true)
+                      ]),
+                      _vm._v(" "),
+                      _c("a", {
+                        staticClass: "stretched-link",
+                        attrs: { href: /postagem/ + post.slug }
+                      })
+                    ])
                   ])
                 ]
               )
@@ -38537,14 +38529,6 @@ var staticRenderFns = [
         _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c("small", { staticClass: "text-muted" }, [_vm._v("★ ★ ★ ★ ☆")])
-    ])
   }
 ]
 render._withStripped = true

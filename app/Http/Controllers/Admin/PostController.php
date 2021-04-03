@@ -150,10 +150,26 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = $this->post->find($id);
+        $post = $this->post->findOrFail($id);
         $post->delete();
 
         flash($this->subtitle . ' Removida com Sucesso!')->success();
         return redirect()->route($this->admin . '.index');
+    }
+    public function ativo($id)
+    {
+        $post = $this->post::findOrFail($id);
+        if($post->status == false){
+            $post->status = true;
+            $post->update();
+            flash('Ativado!')->success();
+            return redirect()->back();
+        }
+        else{
+            $post->status = false;
+            $post->update();
+            flash('Desativado!')->warning();
+            return redirect()->back();
+        }
     }
 }

@@ -27,6 +27,7 @@
         "@ckeditor/ckeditor5-build-classic": "^23.1.0",
         "@splidejs/vue-splide": "^0.3.5",
         "admin-lte": "^3.0.5",
+        "animate.css": "^4.1.1",
         "dropify": "^0.2.2",
         "inputmask": "^5.0.5",
         "laravel-vue-pagination": "^2.3.1",

@@ -15,6 +15,8 @@ class CategoryController extends Controller
     }
     public function post($category)
     {
-        return CategoryResource::collection(Category::where('id', $category)->with('posts')->get());
+        return CategoryResource::collection(Category::where('id', $category)->with('posts', function ($post){
+            $post->whereStatus(true);
+        })->get());
     }
 }

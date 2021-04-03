@@ -10,7 +10,6 @@
 @yield('content')
 @include('pages.layouts.block.footer')
 @include('pages.layouts.block.script')
-<script src="{{ mix('js/app.js') }}"></script>
 @yield('js')
 </body>
 </html>

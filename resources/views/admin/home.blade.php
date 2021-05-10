@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title_prefix', 'Admin - ')
+
 @section('title', 'Dashboard')
 
 @section('content_header')
@@ -7,12 +7,8 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Bem vindo, <b>{{ \Illuminate\Support\Facades\Auth::user()->name }}</b>!</p>
 
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')

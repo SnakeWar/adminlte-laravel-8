@@ -1,6 +1,6 @@
-    @extends('adminlte::page')
-@section('title_prefix', 'Admin - ')
-@section('title', $title)
+@extends('adminlte::page')
+@section('title_prefix', env('APP_NAME') . ' - ')
+@section('title', $subtitle)
 @section('dropify')
     <link rel="stylesheet" href="{{asset('dropify/css/dropify.css')}}">
     <link rel="stylesheet" href="{{asset('dropify/fonts/dropify.ttf')}}">
@@ -8,24 +8,24 @@
 @section('content')
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}" class="pr-1"><i class="fa fa-address-card"></i> Home /</a></li>
-        <li><a href="{{ route('admin.posts.index') }}" class="pr-1"> {{$title}} /</a></li>
-        <li class="active"> Editar</li>
+        <li><a href="{{ route($admin . '.index') }}" class="pr-1">{{ $title }} /</a></li>
+        <li class="active"> {{ isset($model) ? 'Editar '.$subtitle : 'Adicionar '.$subtitle }}</li>
     </ol>
     <div class="card card-outline card-primary">
         <div class="card-header">
-            <h1 class="card-title">Editar {{$title}}</h1>
+            <h1 class="card-title">{{$subtitle}}</h1>
         </div>
-        @include('flash::message')
-
         <div class="card-body">
-            <form action="{{route('admin.posts.update', ['post' => $post->id])}}" method="post"
-                  enctype="multipart/form-data">
+            <form action="{{ isset($model) ? route($admin . '.update', $model->id) : route($admin. '.store')}}" method="post" enctype="multipart/form-data">
+
                 @csrf
-                @method("PUT")
+                @if(!empty($model))
+                    @method('PUT')
+                @endif
                 <div class="form-group">
                     <label for="">Título</label>
                     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                           value="{{$post->title}}">
+                           value="{{ isset($model) ? $model->title : old('title') }}">
                     @error('title')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -34,36 +34,34 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">Descrição</label>
-                    <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                           value="{{$post->description}}">
-                    @error('description')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="">Categorias</label>
-                    <select name="categories[]" id="" class="form-control" multiple>
-                        @foreach($categories as $category)
-                            <option value="{{$category->id}}"
-                                    @if($post->categories->contains($category)) selected @endif>{{$category->title}}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="">Conteúdo</label>
                     <textarea type="text" id="editor1" name="body" cols="30" rows="10"
-                              class="form-control @error('body') is-invalid @enderror">{{$post->body}}</textarea>
+                              class="form-control @error('body') is-invalid @enderror">{{ isset($model) ? $model->body : old('body') }}</textarea>
                     @error('body')
                     <div class="invalid-feedback">
                         {{$message}}
                     </div>
                     @enderror
                 </div>
+
+                {{--        <div class="form-group">--}}
+                {{--            <label for="">Preço</label>--}}
+                {{--            <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{old('price')}}">--}}
+                {{--            @error('price')--}}
+                {{--            <div class="invalid-feedback">--}}
+                {{--                {{$message}}--}}
+                {{--            </div>--}}
+                {{--            @enderror--}}
+                {{--        </div>--}}
+{{--                <div class="form-group">--}}
+{{--                    <label for="">Categorias</label>--}}
+{{--                    <select name="categories[]" class="form-control" multiple>--}}
+{{--                        @foreach($categories as $category)--}}
+{{--                            <option value="{{$category->id}}" {{ isset($model) ? (($model->categories->contains($category)) ? 'selected' : '') : '' }}>{{$category->title}}</option>--}}
+{{--                            {{$category->id}}|{{$category->title}}--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                </div>--}}
 
                 <div class="form-group">
                     <label for="">Foto</label>
@@ -73,48 +71,23 @@
                         {{$message}}
                     </div>
                     @enderror
+                    @if(isset($model->photo))
+                        <div class="box-body mt-3">
+                            <img class="img-panel img-thumbnail w-25" src="{{ asset("storage/$model->photo") }}" alt="{{ $model->title }}">
+                        </div>
+                    @endif
                 </div>
-                {{--            <div class="row">--}}
-                {{--                <div class="col-6">--}}
-                {{--                    <img src="{{asset('storage/' . $post->photo)}}" alt="" class="img-fluid w-25">--}}
-                {{--                </div>--}}
-                {{--            </div>--}}
                 <div class="form-group">
-                    <label for="">Galeria</label>
-                    <input type="file" class="dropify form-control @error('photos') is-invalid @enderror" name="photos[]"
-                           multiple>
-                    @error('photos')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                    @enderror
-                </div>
-
-                <div class="form-group mt-5">
                     <button type="submit" class="btn btn-block btn-lg btn-primary">
-                        Atualizar
+                        {{ isset($model) ? 'Atualizar '.$subtitle : 'Criar '.$subtitle }}
                     </button>
                 </div>
+
             </form>
-        </div>
-    </div>
-    <div class="container-fluid p-5">
-        <div class="row">
-            @foreach($post->photos as $photo)
-                <div class="col-lg-4 col-6 text-center">
-                    <form action="{{route('admin.post_photo_remove')}}" method="post">
-                        @csrf
-                        <input type="hidden" name="photoName" value="{{$photo->photo}}">
-                        <button type="submit" class="btn btn-sm btn-danger my-2"><i class="fa fx fa-close">Remover</i></button>
-                    </form>
-                    <img src="{{asset('storage/' . $photo->photo)}}" alt="" class="img-responsive w-50">
-                </div>
-            @endforeach
         </div>
     </div>
 
 @endsection
-
 @section('js')
     <style>
         .ck-editor__editable {
@@ -151,9 +124,19 @@
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 @endsection
+
 @section('dropify_js')
     <script src="{{asset('dropify/js/dropify.js')}}"></script>
     <script>
-        $('.dropify').dropify();
+        $('.dropify').dropify(
+            {
+                messages: {
+                    'default': 'Arraste e solte um arquivo aqui ou clique',
+                    'replace': 'Arraste solte ou clique para modificar',
+                    'remove':  'Remover',
+                    'error':   'Ooops, Algo de errado aconteceu.'
+                }
+            }
+        );
     </script>
 @endsection

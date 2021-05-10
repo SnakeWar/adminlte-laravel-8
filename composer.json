@@ -9,17 +9,18 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "albertcht/invisible-recaptcha": "^1.9",
         "barryvdh/laravel-debugbar": "^3.5",
         "ckfinder/ckfinder-laravel-package": "v3.5.1.6",
         "cviebrock/eloquent-sluggable": "^8.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "jeroennoten/laravel-adminlte": "^3.5",
+        "jeroennoten/laravel-adminlte": "^3.5.4",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.1",
+        "laravel/ui": "^3.2",
         "laravelcollective/html": "^6.2"
     },
     "require-dev": {
@@ -52,7 +53,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/traits/functions.php"
+            "app/Traits/Functions.php",
+            "app/Helpers/Helper.php"
         ]
     },
     "minimum-stability": "dev",

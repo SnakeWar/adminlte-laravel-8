@@ -30,8 +30,32 @@ class ModulesTableSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
+                'title' => 'Páginas',
+                'url' => 'pages',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'title' => 'Contato',
+                'url' => 'contacts',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'title' => 'Trabalhe Conosco',
+                'url' => 'workwithus',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
                 'title' => 'Postagens',
                 'url' => 'posts',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'title' => 'Produtos',
+                'url' => 'products',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
@@ -44,6 +68,12 @@ class ModulesTableSeeder extends Seeder
             [
                 'title' => 'Categorias',
                 'url' => 'categories',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'title' => 'Categorias de Produtos',
+                'url' => 'categories_products',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

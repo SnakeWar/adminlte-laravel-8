@@ -5,16 +5,15 @@ namespace App\Traits;
 
 trait UploadTraits
 {
-    public function imageUpload($images, $imageColumn = null){
+    public function imageUpload($images, $dir){
 
-        $uploadImages = [];
+        $uploadImages = $images->store($dir, 'public');
 
-        if(!is_null($imageColumn)) {
-            foreach ($images as $image) {
-                $uploadImages[] = [$imageColumn => $image->store('posts', 'public')];
-            }
-        } else{
-            $uploadImages = $images->store('posts', 'public');
+        return $uploadImages;
+    }
+    public function imagesUpload($images, $dir, $imageColumn = null){
+        foreach ($images as $image) {
+            $uploadImages[] = [$imageColumn => $image->store($dir, 'public')];
         }
         return $uploadImages;
     }

@@ -1,9 +1,29 @@
 <template>
     <!-- Page Content -->
     <div class="container-fluid">
-        <div class="row">
+        <div class="row mt-5">
+<!--            <div class="col-lg-12">-->
+<!--                <div id="carouselExampleIndicators" class="carousel slide mb-5" data-ride="carousel">-->
+<!--                    <ol class="carousel-indicators">-->
+<!--                        <li data-target="#carouselExampleIndicators" v-for="(item, index) in images" :key="index" data-slide-to=":key" v-bind:class="[index==0 ? 'active' : '']"></li>-->
+<!--                    </ol>-->
+<!--                    <div class="carousel-inner" role="listbox">-->
+<!--                        <div class="carousel-item" v-for="(item, index) in images" v-bind:class="[index==0 ? 'active' : '']">-->
+<!--                            <img class="d-block img-fluid" height="300px" v-bind:src="/storage/ + item.photo" alt="">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">-->
+<!--                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                        <span class="sr-only">Previous</span>-->
+<!--                    </a>-->
+<!--                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">-->
+<!--                        <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                        <span class="sr-only">Next</span>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="col-lg-3">
-                <h1 class="my-4">Notícias</h1>
+                <h1 class="">Viagens</h1>
                 <div class="list-group">
                     <input v-model="search_post" placeholder="Pesquise..." class="list-group-item mb-1" v-on:input="getPost(search_post)">
                 </div>
@@ -18,26 +38,6 @@
             </div>
             <!-- /.col-lg-3 -->
             <div class="col-lg-9">
-                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" v-for="(item, index) in images" :key="index" data-slide-to=":key" v-bind:class="[index==0 ? 'active' : '']"></li>
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item" v-for="(item, index) in images" v-bind:class="[index==0 ? 'active' : '']">
-                            <img class="d-block img-fluid" v-bind:src="/storage/ + item.photo" alt="">
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-                <hr>
-
                 <div class="row justify-content-center">
                     <div :class="{'loading' : loading}">
                     </div>
@@ -176,7 +176,7 @@ export default {
                 console.log(this.page)
                 //if(this.page == this.last_page) this.isActive = 99999999
             });
-            if(this.page <= this.last_page){
+            if(this.page < this.last_page){
                 this.page = this.page + 1;
             }
             if(this.page == this.last_page){

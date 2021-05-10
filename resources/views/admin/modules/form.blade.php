@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title_prefix', 'Admin - ')
+@section('title_prefix', env('APP_NAME') . ' - ')
 @section('title', $title)
 
 @section('content')
@@ -17,6 +17,9 @@
         <div class="card-body">
             <form role="form" method="POST" action="{{ isset($module) ? route('admin.modules.update', $module->id) : route('admin.modules.store')}}" enctype="multipart/form-data">
                 @csrf
+                @if(!empty($module))
+                    @method('PUT')
+                @endif
                 <div class="box-body">
                     <div class="row">
                         <div class="col-lg-12">

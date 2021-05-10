@@ -2085,7 +2085,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(_this6.page); //if(this.page == this.last_page) this.isActive = 99999999
       });
 
-      if (this.page <= this.last_page) {
+      if (this.page < this.last_page) {
         this.page = this.page + 1;
       }
 
@@ -38298,9 +38298,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "row mt-5" }, [
       _c("div", { staticClass: "col-lg-3" }, [
-        _c("h1", { staticClass: "my-4" }, [_vm._v("Notícias")]),
+        _c("h1", {}, [_vm._v("Viagens")]),
         _vm._v(" "),
         _c("div", { staticClass: "list-group" }, [
           _c("input", {
@@ -38376,58 +38376,6 @@ var render = function() {
       _c("div", { staticClass: "col-lg-9" }, [
         _c(
           "div",
-          {
-            staticClass: "carousel slide my-4",
-            attrs: { id: "carouselExampleIndicators", "data-ride": "carousel" }
-          },
-          [
-            _c(
-              "ol",
-              { staticClass: "carousel-indicators" },
-              _vm._l(_vm.images, function(item, index) {
-                return _c("li", {
-                  key: index,
-                  class: [index == 0 ? "active" : ""],
-                  attrs: {
-                    "data-target": "#carouselExampleIndicators",
-                    "data-slide-to": ":key"
-                  }
-                })
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "carousel-inner", attrs: { role: "listbox" } },
-              _vm._l(_vm.images, function(item, index) {
-                return _c(
-                  "div",
-                  {
-                    staticClass: "carousel-item",
-                    class: [index == 0 ? "active" : ""]
-                  },
-                  [
-                    _c("img", {
-                      staticClass: "d-block img-fluid",
-                      attrs: { src: /storage/ + item.photo, alt: "" }
-                    })
-                  ]
-                )
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1)
-          ]
-        ),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c(
-          "div",
           { staticClass: "row justify-content-center" },
           [
             _c("div", { class: { loading: _vm.loading } }),
@@ -38481,56 +38429,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "carousel-control-prev",
-        attrs: {
-          href: "#carouselExampleIndicators",
-          role: "button",
-          "data-slide": "prev"
-        }
-      },
-      [
-        _c("span", {
-          staticClass: "carousel-control-prev-icon",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "carousel-control-next",
-        attrs: {
-          href: "#carouselExampleIndicators",
-          role: "button",
-          "data-slide": "next"
-        }
-      },
-      [
-        _c("span", {
-          staticClass: "carousel-control-next-icon",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

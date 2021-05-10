@@ -14,11 +14,12 @@ class ModuleController extends Controller
 
     protected $module;
     protected $title;
-    public function __construct(Module $module)
+    public function __construct(Module $module, Permission $permission)
     {
         $this->module = $module;
+        $this->permission = $permission;
         $this->title = 'Módulos';
-        $this->subtitle = 'Adicionar Módulo';
+        $this->subtitle = 'Módulo';
         $this->middleware('auth');
     }
     /**
@@ -55,10 +56,10 @@ class ModuleController extends Controller
         $module = $this->module->create($dataForm);
         if (isset($module) && !is_null($module)) {
             // CRUD permissions
-            Permission::create(array('title' => ('create_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
-            Permission::create(array('title' => ('read_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
-            Permission::create(array('title' => ('update_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
-            Permission::create(array('title' => ('delete_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
+            $this->permission->create(array('title' => ('create_'.strtolower(Helper::sanitizeString($module->url))), 'module_id' => $module->id));
+            $this->permission->create(array('title' => ('read_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
+            $this->permission->create(array('title' => ('update_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
+            $this->permission->create(array('title' => ('delete_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
         }
         if($module){
             return redirect('/admin/modules')->with('success', 'Módulo criado com sucesso!');
@@ -90,22 +91,23 @@ class ModuleController extends Controller
         $dataForm = $request->all();
         $module = $this->module->find($id);
         if($module->update($dataForm)){
-            Permission::where('module_id', $id)
+            $this->permission->where('module_id', $id)
                 ->where('title', 'like', 'create_%')
                 ->update(['title' => 'create_'.strtolower($this->sanitizeString($module->url))]);
-            Permission::where('module_id', $id)
+            $this->permission->where('module_id', $id)
                 ->where('title', 'like', 'read_%')
                 ->update(['title' => 'read_'.strtolower($this->sanitizeString($module->url))]);
-            Permission::where('module_id', $id)
+            $this->permission->where('module_id', $id)
                 ->where('title', 'like', 'update_%')
                 ->update(['title' => 'update_'.strtolower($this->sanitizeString($module->url))]);
-            Permission::where('module_id', $id)
+            $this->permission->where('module_id', $id)
                 ->where('title', 'like', 'delete_%')
                 ->update(['title' => 'delete_'.strtolower($this->sanitizeString($module->url))]);
-
-            return redirect('/admin/modules')->with('success', 'Módulo alterado com sucesso!');
+            flash($this->subtitle . ' Atualizada com Sucesso!')->success();
+            return redirect('/admin/modules');
         }else{
-            return redirect('/admin/modules')->with('fail', 'Falha ao editar o módulo!');
+            flash('Houve problema ao atualizar' . $this->subtitle . '!')->error();
+            return redirect('/admin/modules');
         }
     }
     /**
@@ -121,9 +123,11 @@ class ModuleController extends Controller
         // Deletes module\s permission
         $module->permissions()->update(['deleted_at' => now()]);
         if($module){
-            return redirect('/admin/modules')->with('success', 'Módulo excluído com sucesso!');
+            flash($this->subtitle . ' Excluído(a) com Sucesso!')->success();
+            return redirect('/admin/modules');
         }else {
-            return redirect('/admin/modules')->with('fail', 'Falha ao excluir o módulo!');
+            flash('Houve problema ao excluir' . $this->subtitle . '!')->error();
+            return redirect('/admin/modules');
         }
     }
 }

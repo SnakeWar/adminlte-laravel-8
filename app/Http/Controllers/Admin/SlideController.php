@@ -33,7 +33,7 @@ class SlideController extends Controller
     public function index()
     {
         return view($this->admin . '.index', [
-            'slides' => $this->slide::with('photos')->paginate(10),
+            'slides' => $this->slide->with('photos')->paginate(10),
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'admin' => $this->admin
@@ -90,7 +90,7 @@ class SlideController extends Controller
      */
     public function edit($id)
     {
-        $slide = $this->slide::with('photos')->findOrFail($id);
+        $slide = $this->slide->with('photos')->findOrFail($id);
         //dd($slide);
         return view($this->admin . '.edit', ['slide' => $slide, 'title' => $this->subtitle]);
     }
@@ -112,13 +112,13 @@ class SlideController extends Controller
             if(Storage::disk('public')->exists($slide->photo)){
                 Storage::disk('public')->delete($slide->photo);
             }
-            $data['photo'] = $this->imageUpload($request->file('photo'));
+            $data['photo'] = $this->imageUpload($request->file('photo'), $this->view);
         }
 
         $slide->update($data);
 
         if($request->hasFile('photos')){
-            $images = $this->imageUpload($request->file('photos'), 'photo');
+            $images = $this->imageUpload($request->file('photos'), $this->view);
             $slide->photos()->createMany($images);
             flash('Foto(s) adicionadas com Sucesso!')->success();
             return redirect()->back();

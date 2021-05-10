@@ -1,30 +1,31 @@
 @extends('adminlte::page')
-@section('title_prefix', 'Admin - ')
-@section('title', $title)
+@section('title_prefix', env('APP_NAME') . ' - ')
+@section('title', $subtitle)
 @section('dropify')
     <link rel="stylesheet" href="{{asset('dropify/css/dropify.css')}}">
     <link rel="stylesheet" href="{{asset('dropify/fonts/dropify.ttf')}}">
-@section('title', $subtitle)
 @endsection
 @section('content')
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}" class="pr-1"><i class="fa fa-address-card"></i> Home /</a></li>
-        <li><a href="{{ route('admin.posts.index') }}" class="pr-1"> {{$title}} /</a></li>
-        <li class="active"> Criar</li>
+        <li><a href="{{ route($admin . '.index') }}" class="pr-1">{{ $title }} /</a></li>
+        <li class="active"> {{ isset($model) ? 'Editar '.$subtitle : 'Adicionar '.$subtitle }}</li>
     </ol>
     <div class="card card-outline card-primary">
         <div class="card-header">
             <h1 class="card-title">{{$subtitle}}</h1>
         </div>
         <div class="card-body">
-            <form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{ isset($model) ? route($admin . '.update', $model->id) : route($admin. '.store')}}" method="post" enctype="multipart/form-data">
 
                 @csrf
-
+                @if(!empty($model))
+                    @method('PUT')
+                @endif
                 <div class="form-group">
                     <label for="">Título</label>
                     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                           value="{{old('title')}}">
+                           value="{{ isset($model) ? $model->title : old('title') }}">
                     @error('title')
                     <div class="invalid-feedback">
                         {{$message}}
@@ -35,48 +36,8 @@
                 <div class="form-group">
                     <label for="">Descrição</label>
                     <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
-                           value="{{old('description')}}">
+                           value="{{ isset($model) ? $model->title : old('description') }}">
                     @error('description')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label for="">Conteúdo</label>
-                    <textarea type="text" id="editor1" name="body" cols="30" rows="10"
-                              class="form-control @error('body') is-invalid @enderror">{{old('body')}}</textarea>
-                    @error('body')
-                    <div class="invalid-feedback">
-                        {{$message}}
-                    </div>
-                    @enderror
-                </div>
-
-                {{--        <div class="form-group">--}}
-                {{--            <label for="">Preço</label>--}}
-                {{--            <input type="text" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{old('price')}}">--}}
-                {{--            @error('price')--}}
-                {{--            <div class="invalid-feedback">--}}
-                {{--                {{$message}}--}}
-                {{--            </div>--}}
-                {{--            @enderror--}}
-                {{--        </div>--}}
-                <div class="form-group">
-                    <label for="">Categorias</label>
-                    <select name="categories[]" class="form-control" multiple>
-                        @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->title}}</option>
-                            {{$category->id}}|{{$category->name}}
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Foto</label>
-                    <input type="file" class="dropify form-control @error('photo') is-invalid @enderror" name="photo">
-                    @error('photo')
                     <div class="invalid-feedback">
                         {{$message}}
                     </div>
@@ -84,7 +45,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-block btn-lg btn-primary">
-                        Criar Postagem
+                        {{ isset($model) ? 'Atualizar '.$subtitle : 'Criar '.$subtitle }}
                     </button>
                 </div>
 

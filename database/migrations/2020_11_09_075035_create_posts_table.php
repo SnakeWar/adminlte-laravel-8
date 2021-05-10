@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->Increments('id');
+            $table->dateTime('published_at')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('title')->unique();
@@ -22,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->longText('body');
-            $table->boolean('status')->default(false);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -1,31 +1,42 @@
-<meta charset="utf-8">
-{{--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">--}}
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="content-language" content="pt-br">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="description" content="{{ $description ?? env('APP_NAME') }}" />
+<meta name="keywords" content="" />
+<meta name="robots" content="index,follow,noodp">
+<meta name="googlebot" content="index,follow">
+<meta name="subject" content="{{ $title ?? env('APP_NAME') }}">
+<meta name="abstract" content="{{ $title ?? env('APP_NAME') }}">
+<meta name="topic" content="{{ $title ?? env('APP_NAME') }}">
+<meta name="summary" content="{{ $title ?? env('APP_NAME') }}">
+<meta property="og:url" content="{{ $url ?? env('APP_URL') }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ $title ?? env('APP_NAME') }}">
+<meta property="og:image" content="{{ $img ?? asset('assets/img/favicon.ico') }}">
+<meta property="og:description" content="{{ $description ?? env('APP_NAME') }}">
+<meta property="og:site_name" content="{{ $title ?? env('APP_NAME') }}">
+<meta property="og:locale" content="pt_BR">
+<meta itemprop="name" content="{{ $title ?? env('APP_NAME') }}">
+<meta itemprop="description" content="{{ $description ?? env('APP_NAME') }}">
+<meta itemprop="image" content="{{ $img ?? asset('assets/img/favicon.ico') }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="{{ env('APP_NAME') }}">
+<meta name="twitter:url" content="{{ $url ?? env('APP_URL') }}">
+<meta name="twitter:title" content="{{ $title ?? env('APP_NAME') }}">
+<meta name="twitter:description" content="{{ $description ?? env('APP_NAME') }}">
+<meta name="twitter:image" content="{{ asset('assets/img/favicon.ico') }}">
+<meta name="msapplication-TileColor" content="#3eb0ee">
+<meta name="theme-color" content="#3eb0ee">
 
-<title>{{$title}}</title>
+<title>{{ $title ?? env('APP_NAME') }}</title>
+<link rel="shortcut icon" type="image/png" href="{{ asset('assets/img/favicon.ico') }}" />
 
-<!-- Bootstrap core CSS -->
-<link href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/index.css') }}">
 
-<!-- Custom styles for this template -->
-<link href="{{asset('assets/css/shop-homepage.css')}}" rel="stylesheet">
-<link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
-<link href="{{asset('vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/owl-carousel/assets/owl.carousel.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/vendor/owl-carousel/assets/owl.theme.default.min.css') }}">
 
-<style>
-    .loading {
-        border: 16px solid #f3f3f3; /* Light grey */
-        border-top: 16px solid #3498db; /* Blue */
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">

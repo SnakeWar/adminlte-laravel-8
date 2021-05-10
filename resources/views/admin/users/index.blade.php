@@ -6,7 +6,7 @@
         }
     </style>
 @endsection
-@section('title_prefix', 'Admin - ')
+@section('title_prefix', env('APP_NAME') . ' - ')
 @section('title', $title)
 @section('content')
             <div class="container-fluid">

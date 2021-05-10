@@ -8,14 +8,15 @@ use App\Http\Requests\CategoryUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Traits\Functions;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
     use Functions;
 
-    public function __construct(Category $category)
+    public function __construct(Category $model)
     {
-        $this->category = $category;
+        $this->model = $model;
         $this->title = 'Categorias';
         $this->subtitle = 'Categoria';
         $this->middleware('auth');
@@ -31,7 +32,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view($this->admin . '.index', [
-            'categories' => $this->category->paginate(10),
+            'model' => $this->model->paginate(10),
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'admin' => $this->admin
@@ -45,7 +46,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view($this->admin . '.create',['title' => $this->title, 'subtitle' => $this->subtitle]);
+        return view($this->admin . '.form',[
+            'title' => $this->title,
+            'subtitle' => $this->subtitle,
+            'admin' => $this->admin
+        ]);
     }
 
     /**
@@ -57,8 +62,8 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         $data = $request->all();
-
-        $category = $this->category->create($data);
+        $data['slug'] = Str::slug($data['title']);
+        $model = $this->model->create($data);
 
         flash($this->subtitle . ' Criada com Sucesso!')->success();
         return redirect()->route($this->admin . '.index');
@@ -83,8 +88,13 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = $this->category->findOrFail($id);
-        return view($this->admin . '.edit', ['category' => $category, 'title' => $this->title]);
+        $model = $this->model->findOrFail($id);
+        return view($this->admin . '.form', [
+            'model' => $model,
+            'title' => $this->title,
+            'subtitle' => $this->subtitle,
+            'admin' => $this->admin
+        ]);
     }
 
     /**
@@ -98,8 +108,8 @@ class CategoryController extends Controller
     {
         $data = $request->all();
 
-        $category = $this->category->find($id);
-        $category->update($data);
+        $model = $this->model->find($id);
+        $model->update($data);
 
         flash($this->subtitle . ' Atualizada com Sucesso!')->success();
         return redirect()->route($this->admin . '.index');
@@ -113,10 +123,26 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = $this->category->findOrFail($id);
-        $category->delete();
+        $model = $this->model->findOrFail($id);
+        $model->delete();
 
         flash($this->subtitle . ' Removida com Sucesso!')->success();
         return redirect()->route($this->admin . '.index');
+    }
+    public function ativo($id)
+    {
+        $post = $this->model->findOrFail($id);
+        if($post->status == false){
+            $post->status = true;
+            $post->update();
+            flash('Ativado!')->success();
+            return redirect()->back();
+        }
+        else{
+            $post->status = false;
+            $post->update();
+            flash('Desativado!')->warning();
+            return redirect()->back();
+        }
     }
 }

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title_prefix', 'Admin - ')
+@section('title_prefix', env('APP_NAME') . ' - ')
 @section('title', $title)
 @section('content')
     <ol class="breadcrumb">

@@ -35,8 +35,8 @@ Auth::routes();
 
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
-    Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
-    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    Route::get('home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index']);
     Route::resource('slides', App\Http\Controllers\Admin\SlideController::class)->middleware('can:read_slides');
 
     Route::resource('posts', App\Http\Controllers\Admin\PostController::class)->middleware('can:read_posts');

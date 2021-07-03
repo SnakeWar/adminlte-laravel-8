@@ -1,9 +1,9 @@
 <section class="navegador">
     <nav class="navbar navbar-expand-lg navbar-light ">
         <a class="navbar-brand mr-5" href="index.php">
-            <img src="assets/img/logo.png" alt=""></a>
+            <img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
         <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <img src="assets/img/icon/menu.png" alt="">
+            <img src="{{ asset('assets/img/icon/menu.png') }}" alt="">
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -38,10 +38,10 @@
                 </li>
                 <div class="li_sociais">
                     <li class="mr-1">
-                        <a href="https://www.facebook.com/frangobomtodo" target="_blank" class="mr-2"><img class="pulse" src="{{ asset('assets/img/icon/facebook_1.png') }}" alt=""></a>
+                        <a href="https://www.facebook.com" target="_blank" class="mr-2"><i class="fab fa-facebook"></i></a>
                     </li>
                     <li class="">
-                        <a href="https://www.instagram.com/sigabomtodo/" target="_blank"><img class="pulse" src="{{ asset('assets/img/icon/instagram_1.png') }}" alt=""></a>
+                        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
                     </li>
                 </div>
 

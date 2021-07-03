@@ -8,6 +8,8 @@
 
 use Carbon\Carbon;
 
+\Carbon\Carbon::setLocale('pt_BR');
+
 class Helper
 {
 

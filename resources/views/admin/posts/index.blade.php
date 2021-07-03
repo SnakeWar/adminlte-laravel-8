@@ -22,7 +22,9 @@
         @if(isset($model))
             <table id="myTable" class="table table-bordered table-striped data-table table-responsive-sm">
                 <thead>
-                <th>#</th>
+                <th>Criação</th>
+                <th>Atualização</th>
+                <th>Publicação</th>
                 <th>Título</th>
                 <th>Foto</th>
                 <th>Autor</th>
@@ -32,7 +34,13 @@
                 @foreach($model as $item)
                     <tr>
                         <td>
-                            {{$item->id}}
+                            {{Helper::convertdata_tosite($item->created_at)}}
+                        </td>
+                        <td>
+                            {{$item->updated_at->diffForHumans()}}
+                        </td>
+                        <td>
+                            {{Helper::convertdata_tosite($item->published_at)}}
                         </td>
                         <td>
                             {{$item->title}}

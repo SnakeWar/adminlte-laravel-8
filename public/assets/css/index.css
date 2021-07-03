@@ -132,7 +132,8 @@ section.navegador {
     width: 100%;
     z-index: 5;
     position: fixed;
-    background-image: url(../img/bg_nav.png);
+    background-color: white;
+    /*background-image: url(../img/bg_nav.png);*/
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
@@ -295,8 +296,9 @@ section.img_vitrine .owl-dots .owl-dot span {
 /* section quem-somos */
 
 section.quem-somos {
-    background-image: url(../img/bg_quemsomos.png);
+    /*background-image: url(../img/bg_quemsomos.png);*/
     background-repeat: no-repeat;
+    background: #E22524;
     background-position: center;
     background-size: cover;
     height: 1500px;
@@ -443,7 +445,7 @@ section.instagram {
 /* section blog */
 
 section.blog {
-    background-image: url(../img/bg_blog.png);
+    /*background-image: url(../img/bg_blog.png);*/
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -453,6 +455,7 @@ section.blog {
     align-items: center;
     justify-content: center;
     padding-top: 3rem;
+    background: #E22524;
 }
 
 section.blog h1 {
@@ -580,6 +583,10 @@ section.blog .ver_todos:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.li_sociais .fa-facebook, .fa-instagram {
+    color: #E22524;
+    font-size: 30px;
 }
 
 
@@ -733,7 +740,8 @@ section.contato .btn.enviar:hover {
 /*  footer */
 
 footer {
-    background-image: url(../img/bg_footer.png);
+    /*background-image: url(../img/bg_footer.png);*/
+    background-color: #E22524;
     background-repeat: no-repeat;
     background-size: auto;
     background-position: bottom;
@@ -743,7 +751,7 @@ footer {
     color: #ffffff;
     padding: 10rem 0 0;
     height: 572px;
-    background-color: white;
+    /*background-color: white;*/
 }
 
 footer h1 {
@@ -1136,7 +1144,7 @@ section.form .btn.enviar:hover {
         margin-left: 0;
     }
     footer {
-        background-image: url(../img/bg_footer2.png);
+        /*background-image: url(../img/bg_footer2.png);*/
         background-repeat: no-repeat;
         background-size: cover;
         background-position: top;
@@ -1179,7 +1187,7 @@ section.form .btn.enviar:hover {
         width: 50px;
     }
     section.quem-somos {
-        background-image: url(../img/bg_quemsomos.png);
+        /*background-image: url(../img/bg_quemsomos.png);*/
         background-repeat: no-repeat;
         background-position: right;
         background-size: cover;
@@ -1212,7 +1220,7 @@ section.form .btn.enviar:hover {
         width: 50px;
     }
     section.blog {
-        background-image: url(../img/bg_blog.png);
+        /*background-image: url(../img/bg_blog.png);*/
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;

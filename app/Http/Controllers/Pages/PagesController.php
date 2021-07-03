@@ -116,15 +116,42 @@ class PagesController extends Controller
     public function post($slug)
     {
 //        $posts = $this->post->whereStatus(1)->paginate(16);
-        $post = $this->post->whereSlug($slug)->first();
-        return view('pages.post_detail', [
+        $post = $this->post->with('comments')->whereSlug($slug)->first();
+        //$posts = $this->post->with('comments')->get();
+        return view('pages.post', [
             'post' => $post,
-//            'posts' => $posts,
+            //'posts' => $posts,
             'pagina' => 'Blog',
             'title' => 'Endereço do Site - ' . $post->title,
             'img' => env('APP_URL').'/storage/'.$post->photo,
             'description' => $post->description
         ]);
+    }
+    public function comment(Request $request)
+    {
+        $dados = $request->all();
+        $comment = $this->comment->create($dados);
+        if($comment){
+            flash(' Comentário adicionado com sucesso!')->success();
+        }
+        else{
+            flash('Ops, houve um erro!')->warning();
+        }
+        
+    }
+    public function response(Request $request)
+    {
+        $dados = $request->all();
+        $response = $this->response->create($dados);
+        if($response){
+            flash(' Resposta adicionada com sucesso!')->success();
+            return redirect()->back();
+        }
+        else{
+            flash('Ops, houve um erro!')->warning();
+            return redirect()->back();
+        }
+        
     }
     public function fale_conosco()
     {

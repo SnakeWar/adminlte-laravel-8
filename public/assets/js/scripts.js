@@ -1,4 +1,4 @@
-// script suavizar scroll de rolagem com links de navegacao  
+// script suavizar scroll de rolagem com links de navegacao
 $('.scroll a[href^="#"]').on('click', function(e) {
     e.preventDefault();
     var id = $(this).attr('href'),
@@ -19,7 +19,7 @@ $(window).on('load', function() {
     });
 })
 
-// script reduzir altura do navegador quando usar scroll de rolagem  
+// script reduzir altura do navegador quando usar scroll de rolagem
 $(window).scroll(function() {
     if ($(document).scrollTop() > 50) {
         $('.navegador').addClass('sticky');
@@ -37,7 +37,7 @@ $('#owl-banner').owlCarousel({
     margin:30,
     nav:true,
     animateOut: 'fadeOut',
-    
+
     autoplay:true,
     autoplayTimeout:4000,
     autoplayHoverPause:true,
@@ -45,7 +45,7 @@ $('#owl-banner').owlCarousel({
         0:{
             items:1
         },
-     
+
     }
 })
 
@@ -85,19 +85,21 @@ $('#owl-blog').owlCarousel({
 
 document.querySelector("html").classList.add('js');
 
-var fileInput  = document.querySelector( ".input-file" ),  
+var fileInput  = document.querySelector( ".input-file" ),
     button     = document.querySelector( ".input-file-trigger" ),
     the_return = document.querySelector(".file-return");
-      
-button.addEventListener( "keydown", function( event ) {  
-    if ( event.keyCode == 13 || event.keyCode == 32 ) {  
-        fileInput.focus();  
-    }  
-});
-button.addEventListener( "click", function( event ) {
-   fileInput.focus();
-   return false;
-});  
-fileInput.addEventListener( "change", function( event ) {  
-    the_return.innerHTML = this.value;  
-}); 
+
+// button.addEventListener( "keydown", function( event ) {
+//     if ( event.keyCode == 13 || event.keyCode == 32 && event.keyCode == 32) {
+//         fileInput.focus();
+//     }
+//     return false;
+// });
+// button.addEventListener( "click", function( event ) {
+//    fileInput.focus();
+//    return false;
+// });
+// fileInput.addEventListener( "change", function( event ) {
+//     the_return.innerHTML = this.value;
+//     return false;
+// });

@@ -22,7 +22,7 @@
         @if(isset($model))
             <table id="myTable" class="table table-bordered table-striped data-table table-responsive-sm">
                 <thead>
-                <th>Criação</th>
+                <th>#</th>
                 <th>Atualização</th>
                 <th>Publicação</th>
                 <th>Título</th>
@@ -34,7 +34,8 @@
                 @foreach($model as $item)
                     <tr>
                         <td>
-                            {{Helper::convertdata_tosite($item->created_at)}}
+                            {{-- {{Helper::convertdata_tosite($item->created_at)}} --}}
+                            {{ $item->id }}
                         </td>
                         <td>
                             {{$item->updated_at->diffForHumans()}}
@@ -94,7 +95,10 @@
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 
         $(document).ready(function () {
-            $('#myTable').DataTable();
+            $('#myTable').DataTable({
+                "order": [[ 0, "desc" ]],
+                // ajax: 'http://localhost/adminlte-laravel-8/public/api/posts'
+            });
         });
     </script>
 @stop

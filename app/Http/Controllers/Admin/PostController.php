@@ -14,6 +14,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Exists;
+use Intervention\Image\Facades\Image;
+
+use function PHPUnit\Framework\directoryExists;
 
 class PostController extends Controller
 {
@@ -40,7 +44,7 @@ class PostController extends Controller
     public function index()
     {
         return view($this->admin . '.index', [
-            'model' => $this->model->with('user')->paginate(10),
+            'model' => $this->model->with('user')->get(),
             'title' => $this->title,
             'subtitle' => $this->subtitle,
             'admin' => $this->admin,
@@ -78,16 +82,27 @@ class PostController extends Controller
         $data['published_at'] = \Helper::convertdata_todb($data['published_at']);
         $categories = $request->get('categories', null);
         $data['user_id'] = Auth::user()->id;
-        //dd($data);
         if($request->hasFile('photo')){
+            if(!is_dir(public_path('/storage/thumbnail/posts')))
+            {
+                mkdir(public_path('/storage/thumbnail/posts'), 0775, true);
+            }
+            // Pega a imagem e salva no storage
             $data['photo'] = $this->imageUpload($request->file('photo'), $this->view);
+            // Pega a imagem já salva e redimensiona proporcionalmente
+            $imageResized = Image::make(public_path("/storage/") . "{$data['photo']}")
+            ->save(public_path("/storage/") . "{$data['photo']}", 60);
+            // Salva a imagem redimensionada e salva na pasta thumbnail
+            //->save(public_path("/storage/thumbnail/") . $data['photo']);
         }
 
         $post = $this->model->create($data);
 
-        $post->categories()->sync($categories);
-        flash($this->subtitle . ' Criada com Sucesso!')->success();
-        return redirect()->route($this->admin . '.index');
+        if($post){
+            $post->categories()->sync($categories);
+            flash($this->subtitle . ' Criada com Sucesso!')->success();
+            return redirect()->route($this->admin . '.index');
+        }
 
     }
 
@@ -144,7 +159,21 @@ class PostController extends Controller
             if(Storage::disk('public')->exists($post->photo)){
                 Storage::disk('public')->delete($post->photo);
             }
-            $data['photo'] = $this->imageUpload($request->file('photo'), $this->view);
+            if($request->hasFile('photo')){
+                if(!is_dir(public_path('/storage/thumbnail/posts')))
+                {
+                    mkdir(public_path('/storage/thumbnail/posts'), 0775, true);
+                }
+                // Pega a imagem e salva no storage
+                $data['photo'] = $this->imageUpload($request->file('photo'), $this->view);
+                // Pega a imagem já salva e redimensiona proporcionalmente
+                $imageResized = Image::make(public_path("/storage/") . "{$data['photo']}")
+                ->resize(300, 300, function($constraint){
+                    $constraint->aspectRatio();
+                })
+                // Salva a imagem redimensionada e salva na pasta thumbnail
+                ->save(public_path("/storage/thumbnail/") . $data['photo']);
+            }
         }
         $post->update($data);
 

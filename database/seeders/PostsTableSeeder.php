@@ -15,17 +15,21 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        $post = Post::create([
-            'title' => Str::random(8),
-            'description' => Str::random(10),
-            'body' => Str::random(100),
-            'status' => 1,
-            'photo' => 'assets/img/logo.png',
-            'created_at' => now(),
-            'updated_at' => now(),
-            'user_id' => 1,
-        ]);
-        $post->categories()->sync([3]);
+        $i = 0;
+        for($i = 0; $i <= 50; $i++){
+            $post = Post::create([
+                'title' => $slug = Str::random(8),
+                'slug' => Str::slug($slug),
+                'description' => Str::random(10),
+                'body' => Str::random(100),
+                'status' => 1,
+                'photo' => 'assets/img/logo.png',
+                'created_at' => now(),
+                'updated_at' => now(),
+                'user_id' => 1,
+            ]);
+            $post->categories()->sync([1]);
+        }
 
     }
 }

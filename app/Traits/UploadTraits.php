@@ -13,7 +13,7 @@ trait UploadTraits
     }
     public function imagesUpload($images, $dir, $imageColumn = null){
         foreach ($images as $image) {
-            $uploadImages[] = [$imageColumn => $image->store($dir, 'public')];
+            $uploadImages[] = [$imageColumn => $image->store('public')];
         }
         return $uploadImages;
     }

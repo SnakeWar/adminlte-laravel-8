@@ -41,9 +41,9 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $products = $this->product->whereStatus(1)->limit(6)->get();
+        $products = $this->product->whereStatus(true)->limit(6)->get();
         //dd(date('Y-m-d'));
-        $posts = $this->post->whereStatus(1)
+        $posts = $this->post->whereStatus(true)
             ->where('published_at', '<=', date('Y-m-d H:i:s'))
             ->get();
         return view('pages.index', [
@@ -69,7 +69,7 @@ class PagesController extends Controller
     }
     public function products()
     {
-        $products = $this->product->whereStatus(1)->paginate(16);
+        $products = $this->product->whereStatus(true)->paginate(16);
         //dd($products);
         return view('pages.products', [
             'products' => $products,
@@ -78,7 +78,7 @@ class PagesController extends Controller
     }
     public function product($slug)
     {
-        $products = $this->product->whereStatus(1)->paginate(16);
+        $products = $this->product->whereStatus(true)->paginate(16);
         $product = $this->product->whereSlug($slug)->first();
         //dd($product);
         return view('pages.product_detail', [
@@ -93,7 +93,7 @@ class PagesController extends Controller
         {
             $posts = $this->post
                 ->where('title', 'like' ,'%' . $request->title . '%')
-                ->whereStatus(1)
+                ->whereStatus(true)
                 ->where('published_at', '<=', date('Y-m-d H:i:s'))
                 ->paginate(16);
             return view('pages.posts', [
@@ -104,7 +104,7 @@ class PagesController extends Controller
         else
         {
             $posts = $this->post
-                ->whereStatus(1)
+                ->whereStatus(true)
                 ->where('published_at', '<=', date('Y-m-d H:i:s'))
                 ->paginate(16);
             return view('pages.posts', [
@@ -115,7 +115,7 @@ class PagesController extends Controller
     }
     public function post($slug)
     {
-//        $posts = $this->post->whereStatus(1)->paginate(16);
+//        $posts = $this->post->whereStatus(true)->paginate(16);
         $post = $this->post->with('comments')->whereSlug($slug)->first();
         //$posts = $this->post->with('comments')->get();
         return view('pages.post', [

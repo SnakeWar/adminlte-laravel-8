@@ -240,6 +240,7 @@ return [
             'DB_HOST',
             'DB_PORT',
             'DB_USERNAME',
+            'DB_NAME',
             'DB_PASSWORD',
             'REDIS_PASSWORD',
             'MAIL_HOST',

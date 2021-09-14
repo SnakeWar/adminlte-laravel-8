@@ -1,4 +1,4 @@
-@extends('pages.layouts.app')
+@extends('pages.layouts.loja')
 @section('css')
     <style>
         .negrito{
@@ -7,8 +7,8 @@
     </style>
 @endsection
 @section('content')
-               @include('pages.layouts.sections.filter_section')
-               @include('pages.layouts.sections.products_section')
+               {{-- @include('pages.layouts.sections.filter_section')
+               @include('pages.layouts.sections.products_section') --}}
                 <div id="app">
                     <front-page>
                     </front-page>

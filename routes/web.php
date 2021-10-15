@@ -73,4 +73,6 @@ Route::middleware('auth')->group(function () {
 
     Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
         ->name('ckfinder_browser');
+
+    Route::post('image-cropper/upload', [App\Http\Controllers\Admin\ImageCropperController::class, 'upload']);
 });

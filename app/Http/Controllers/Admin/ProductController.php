@@ -80,8 +80,8 @@ class ProductController extends Controller
         //$categories = $request->get('categories', null);
         $data['user_id'] = Auth::user()->id;
 //        dd($data);
-        if($request->hasFile('photo')){
-            $data['photo'] = $this->imageUpload($request->file('photo'), $this->view);
+        if($request->hasFile('image')){
+            $data['photo'] = $this->imageUpload($request->file('image'), $this->view);
         }
 
         $model = $this->model->create($data);
@@ -146,11 +146,11 @@ class ProductController extends Controller
         //dd($data, $id);
         $model = $this->model->findOrFail($id);
 
-        if($request->hasFile('photo')){
+        if($request->hasFile('image')){
             if(Storage::disk('public')->exists($model->photo)){
                 Storage::disk('public')->delete($model->photo);
             }
-            $data['photo'] = $this->imageUpload($request->file('photo'), $this->view);
+            $data['photo'] = $this->imageUpload($request->file('image'), $this->view);
         }
 
         $ok = $model->update($data);

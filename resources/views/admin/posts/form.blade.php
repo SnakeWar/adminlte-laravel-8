@@ -21,7 +21,6 @@
         </div>
         <div class="card-body">
             <form action="{{ isset($model) ? route($admin . '.update', $model->id) : route($admin. '.store')}}" method="post" enctype="multipart/form-data">
-
                 @csrf
                 @if(!empty($model))
                     @method('PUT')
@@ -125,7 +124,6 @@
             CKEDITOR.disableAutoInline = true;
             CKEDITOR.addCss('img {max-width:100%; height: auto;}');
             var editor = CKEDITOR.replace('editor1', {
-                extraPlugins: 'uploadimage',
             });
         } else {
             document.getElementById('editor1').innerHTML =

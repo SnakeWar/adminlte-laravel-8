@@ -27,7 +27,7 @@ class ProductRequest extends FormRequest
         return [
             'title'         => 'required|unique:App\Models\Product,title',
             'body'         => 'required',
-            'photo'         => 'required',
+            'image'         => 'required',
         ];
     }
     public function messages()

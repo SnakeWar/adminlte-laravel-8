@@ -11,12 +11,13 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return CategoryResource::collection(Category::has('posts')->get());
+        return CategoryResource::collection(Category::has('posts')->orderBy('created_at', 'desc')->get());
     }
     public function post($category)
     {
         return CategoryResource::collection(Category::where('id', $category)->with('posts', function ($post){
             $post->whereStatus(true);
-        })->get());
+        })
+        ->orderBy('created_at', 'desc')->get());
     }
 }

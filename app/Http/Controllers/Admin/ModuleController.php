@@ -7,6 +7,7 @@ use App\Http\Requests\ModuleFormRequest;
 use App\Models\Module;
 use App\Models\Permission;
 use App\Traits\Functions;
+use Helper;
 use Illuminate\Http\Request;
 class ModuleController extends Controller
 {
@@ -29,7 +30,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = $this->module->orderBy('id', 'desc')->with(['permissions'])->paginate(10);
+        $modules = $this->module->orderBy('id', 'desc')->with(['permissions'])->get();
         $data = ['modules' => $modules, 'title' => $this->title, 'subtitle' => $this->subtitle];
         return view('admin.modules.index')->with($data);
     }
@@ -57,9 +58,9 @@ class ModuleController extends Controller
         if (isset($module) && !is_null($module)) {
             // CRUD permissions
             $this->permission->create(array('title' => ('create_'.strtolower(Helper::sanitizeString($module->url))), 'module_id' => $module->id));
-            $this->permission->create(array('title' => ('read_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
-            $this->permission->create(array('title' => ('update_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
-            $this->permission->create(array('title' => ('delete_'.strtolower($this->sanitizeString($module->url))), 'module_id' => $module->id));
+            $this->permission->create(array('title' => ('read_'.strtolower(Helper::sanitizeString($module->url))), 'module_id' => $module->id));
+            $this->permission->create(array('title' => ('update_'.strtolower(Helper::sanitizeString($module->url))), 'module_id' => $module->id));
+            $this->permission->create(array('title' => ('delete_'.strtolower(Helper::sanitizeString($module->url))), 'module_id' => $module->id));
         }
         if($module){
             return redirect('/admin/modules')->with('success', 'Módulo criado com sucesso!');
@@ -93,16 +94,16 @@ class ModuleController extends Controller
         if($module->update($dataForm)){
             $this->permission->where('module_id', $id)
                 ->where('title', 'like', 'create_%')
-                ->update(['title' => 'create_'.strtolower($this->sanitizeString($module->url))]);
+                ->update(['title' => 'create_'.strtolower(Helper::sanitizeString($module->url))]);
             $this->permission->where('module_id', $id)
                 ->where('title', 'like', 'read_%')
-                ->update(['title' => 'read_'.strtolower($this->sanitizeString($module->url))]);
+                ->update(['title' => 'read_'.strtolower(Helper::sanitizeString($module->url))]);
             $this->permission->where('module_id', $id)
                 ->where('title', 'like', 'update_%')
-                ->update(['title' => 'update_'.strtolower($this->sanitizeString($module->url))]);
+                ->update(['title' => 'update_'.strtolower(Helper::sanitizeString($module->url))]);
             $this->permission->where('module_id', $id)
                 ->where('title', 'like', 'delete_%')
-                ->update(['title' => 'delete_'.strtolower($this->sanitizeString($module->url))]);
+                ->update(['title' => 'delete_'.strtolower(Helper::sanitizeString($module->url))]);
             flash($this->subtitle . ' Atualizada com Sucesso!')->success();
             return redirect('/admin/modules');
         }else{

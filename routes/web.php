@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/loja', 'pages.welcome', ['title' => 'Loja Virtual']);
-Route::get('/', [App\Http\Controllers\Pages\PagesController::class, 'index'])->name('home');
+Route::view('/', 'pages.welcome', ['title' => 'Loja Virtual'])->name('home');
+// Route::get('/', [App\Http\Controllers\Pages\PagesController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\Pages\PagesController::class, 'index']);
 Route::get('/paginas/{slug}', [App\Http\Controllers\Pages\PagesController::class, 'page'])->name('page');
 Route::get('/produtos', [App\Http\Controllers\Pages\PagesController::class, 'products'])->name('products');

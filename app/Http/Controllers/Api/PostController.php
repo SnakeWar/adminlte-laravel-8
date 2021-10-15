@@ -15,8 +15,8 @@ class PostController extends Controller
     {
         return PostResource::collection(Post::whereStatus(true)->orderBy('created_at', 'desc')->paginate(6));
     }
-    public function post_search($post)
+    public function post_search($post = '')
     {
-        return PostResource::collection(Post::whereStatus(true)->where('title', 'like', '%' . $post . '%')->get());
+        return PostResource::collection(Post::whereStatus(true)->where('title', 'like', '%' . $post . '%')->orderBy('created_at', 'desc')->get());
     }
 }

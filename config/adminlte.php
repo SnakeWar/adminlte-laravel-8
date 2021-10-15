@@ -238,6 +238,12 @@ return [
             'icon' => 'fa fa-fw fa-file-alt'
         ],
         [
+            'text' => 'Slides',
+            'url'  => 'admin/slides',
+            'can'  => 'read_pages',
+            'icon' => 'fa fa-fw fa-image-alt'
+        ],
+        [
             'text' => 'Produtos',
             'url'  => 'admin/products',
             'can'  => 'read_products',

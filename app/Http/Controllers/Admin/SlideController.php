@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SlideRequest;
 use App\Http\Requests\SlideUpdateRequest;
 use App\Models\Slide;
-use App\Traits\UploadTrait;
+use App\Traits\UploadTraits;
 use Illuminate\Support\Facades\Storage;
 
 class SlideController extends Controller
 {
-    use UploadTrait;
+    use UploadTraits;
 
     private $slide;
 

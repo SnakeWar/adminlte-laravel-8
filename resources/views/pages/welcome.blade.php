@@ -1,5 +1,6 @@
 @extends('pages.layouts.app')
 @section('css')
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <style>
         .negrito{
             font-weight: bold;
@@ -15,5 +16,5 @@
                 </div>
 @endsection
 @section('js')
-
+<script src="{{ asset('js/app.js') }}"></script>
 @stop

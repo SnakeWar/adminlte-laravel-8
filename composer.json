@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "albertcht/invisible-recaptcha": "^1.9",
         "ckfinder/ckfinder-laravel-package": "v3.5.1.6",
         "cviebrock/eloquent-sluggable": "^8.0",
         "fideloper/proxy": "^4.4",
@@ -50,7 +51,9 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/traits/functions.php"
+            "app/traits/functions.php",
+            "app/traits/uploadtraits.php",
+            "app/helpers/helpers.php"
         ]
     },
     "minimum-stability": "dev",

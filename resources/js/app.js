@@ -7,8 +7,8 @@ window.Vue = require('vue');
 Vue.component('front-page', require('./components/Front.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
 // Vue.component('carousel', require('vue-owl-carousel'));
-Vue.component('Carousel', require('vue-l-carousel'));
-Vue.component('CarouselItem', require('vue-l-carousel'));
+//Vue.component('Carousel', require('vue-l-carousel'));
+//Vue.component('CarouselItem', require('vue-l-carousel'));
 
 const app = new Vue({
     el: '#app',

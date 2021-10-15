@@ -8,12 +8,12 @@
                     <input v-model="search_post" placeholder="Pesquise..." class="list-group-item mb-1" v-on:input="getPost(search_post)">
                 </div>
                 <div class="list-group">
-                    <a class="list-group-item selecionado" href="#" v-bind:class="[isActive==0 ? activeClass : '']" v-on:click="loadPosts">
+                    <button class="list-group-item selecionado" href="#" v-bind:class="[isActive==0 ? activeClass : '']" v-on:click="loadPosts">
                         Todos
-                    </a>
-                    <a class="list-group-item selecionado" href="#" v-bind:class="[isActive==category.id ? activeClass : '']" v-on:click="getCategory(category.id)" v-for="(category, index) in categories">
+                    </button>
+                    <button class="list-group-item selecionado" href="#" v-bind:class="[isActive==category.id ? activeClass : '']" v-on:click="getCategory(category.id)" v-for="(category, index) in categories">
                         {{ category.title }}
-                    </a>
+                    </button>
                 </div>
             </div>
             <!-- /.col-lg-3 -->
@@ -24,7 +24,7 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item" v-for="(item, index) in images" v-bind:class="[index==0 ? 'active' : '']">
-                            <img class="d-block img-fluid" v-bind:src="/storage/ + item.photo" alt="">
+                            <img class="d-block img-fluid" v-bind:src="'/adminlte-laravel-8/public/storage/' + item.photo" alt="">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -37,17 +37,17 @@
                     </a>
                 </div>
                 <hr>
-                <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>
+                <!-- <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination> -->
                 <div class="row justify-content-center">
                     <div class="" :class="{'loading' : loading}">
                     </div>
 
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="post in posts">
                         <div class="card h-100">
-                            <img class="card-img-top" v-bind:src="/storage/ + post.photo" alt="">
+                            <img class="card-img-top" v-bind:src="'/adminlte-laravel-8/public/storage/' + post.photo" alt="">
                             <div class="card-body">
                                 <h4 class="card-title">
-                                    <a class="stretched-link" v-bind:href="/postagem/ + post.slug">{{ post.title }}</a>
+                                    <a class="stretched-link" v-bind:href="'/adminlte-laravel-8/public/postagem/' + post.slug">{{ post.title }}</a>
                                 </h4>
 <!--                                <h5>$24.99</h5>-->
                                 <p class="card-text">{{ post.description }}</p>
@@ -60,7 +60,11 @@
 
                 </div>
                 <!-- /.row -->
-
+                <div class="col-lg-12 text-center my-5">
+                                       <!-- <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination>
+                                       <infinite-loading @distance="1" @infinite="handleLoadMore"></infinite-loading> -->
+                    <button v-if="loadmoreButton == true" class="btn btn-primary" v-on:click="handleLoadMore">Carregar Mais</button>
+                </div>
             </div>
             <!-- /.col-lg-9 -->
 
@@ -85,9 +89,11 @@ export default {
             search_post: '',
             loading: true,
             page: 1,
+            //last_page: 2,
             isActive: 0,
             activeClass: 'active',
-            laravelData: {}
+            laravelData: {},
+            loadmoreButton: true
         }
     },
     // computed: {
@@ -106,7 +112,7 @@ export default {
     methods: {
         loadCategories: function () {
             //Carregar categorias
-            axios.get('/api/categories')
+            axios.get(window.location.href+'api/categories')
             .then((response) => {
                 this.categories = response.data.data
             })
@@ -116,12 +122,15 @@ export default {
         },
         loadPosts: function (page = 1) {
             //Carregar postagens
-            axios.get('/api/posts?page='+ page)
+            axios.get(window.location.href+'api/posts?page='+ page)
                 .then((response) => {
                     this.isActive = 0
+                    this.page = 2;
                     this.posts = response.data.data
                     this.laravelData = response.data
                     this.loading = false
+                    this.loadmoreButton = true
+                    //console.log(this.posts.length)
                 })
                 .catch(function (error){
                     console.log(error)
@@ -129,18 +138,19 @@ export default {
         },
         loadSlides: function () {
             //Carregar imagens
-            axios.get('/api/slides')
+            axios.get(window.location.href+'api/slides')
                 .then(response => {
                     console.log(response.data.data[0].photos)
                     this.images = response.data.data[0].photos;
                 });
         },
         getCategory: function (category) {
-            axios.get('/api/post/' + category)
+            axios.get(window.location.href+'api/post/' + category)
                 .then((response) => {
+                    this.loadmoreButton = false
                     this.isActive = category
+                    console.log(this.isActive)
                     this.posts = response.data.data[0].posts
-
                 })
                 .catch(function (error){
                     console.log(error)
@@ -148,15 +158,33 @@ export default {
         },
         getPost: function (evt){
             console.log(evt)
-            axios.get('/api/post_search/' + evt)
+            axios.get(window.location.href+'api/post_search/' + evt)
                 .then((response) => {
-                    console.log(response)
+                    //console.log(response)
                     this.isActive = -1
                     this.posts = response.data.data
                 })
                 .catch(function (error){
                     console.log(error)
                 });
+        },
+        handleLoadMore: function () {
+            axios.get(window.location.href+'api/posts?page=' + this.page)
+                .then(res => {
+                    //console.log(res.data.meta.current_page);
+                $.each(res.data.data, (key, value) => {
+                    this.posts.push(value);
+                });
+                this.last_page = res.data.meta.last_page;
+                //console.log(this.page)
+                //if(this.page == this.last_page) this.isActive = 99999999
+            });
+            if(this.page < this.last_page){
+                this.page = this.page + 1;
+            }
+            if(this.page == this.last_page){
+                this.loadmoreButton = false
+            }
         },
     }
 }

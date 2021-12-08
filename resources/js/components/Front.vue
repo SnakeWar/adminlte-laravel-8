@@ -1,33 +1,17 @@
 <template>
     <!-- Page Content -->
-    <div class="container">
-        <div class="row d-flex">
-            <div class="col-lg-3">
-                <h1 class="my-4">Loja Virtual</h1>
-                <div class="list-group">
-                    <input v-model="search_post" placeholder="Pesquise..." class="list-group-item mb-1" v-on:input="getPost(search_post)">
-                </div>
-                <div class="input-group">
-                    <!-- <button class="list-group-item selecionado" href="#" v-bind:class="[isActive==0 ? activeClass : '']" v-on:click="loadPosts">
-                        Todos
-                    </button>
-                    <button class="list-group-item selecionado" href="#" v-bind:class="[isActive==category.id ? activeClass : '']" v-on:click="getCategory(category.id)" v-for="(category, index) in categories">
-                        {{ category.title }}
-                    </button> -->
-                    <select class="custom-select custom-select-lg" v-on:change="changeItem($event)">
-                        <option v-bind:value="'Todos'">Todos</option>
-                        <option v-for="(category, index) in categories" v-bind:value="category.id">{{  category.title  }}</option>
-                    </select>
-                </div>
-            </div>
-            <!-- /.col-lg-3 -->
-            <div class="col-lg-9">
-                <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+    <div class="container-fluid px-0">
+        <div class="row">
+            <!-- <div class="col-lg-12">
+                <h1 class="my-4 text-center">Loja Virtual</h1>
+            </div> -->
+            <div class="col-lg-12 mt-0">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" v-for="(item, index) in images" :key="index" data-slide-to=":key" v-bind:class="[index==0 ? 'active' : '']"></li>
                     </ol>
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item" v-for="(item, index) in images" v-bind:class="[index==0 ? 'active' : '']">
+                        <div class="carousel-item" className="slide-superior" v-for="(item, index) in images" v-bind:class="[index==0 ? 'active' : '']">
                             <img class="d-block img-fluid" v-bind:src="'/adminlte-laravel-8/public/storage/' + item.photo" alt="">
                         </div>
                     </div>
@@ -40,13 +24,37 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-                <hr>
+                <hr class="mt-3">
+            </div>
+    </div>
+    <div class="container">
                 <!-- <pagination v-if="isActive==0" class="col-12 justify-content-center" :data="laravelData" @pagination-change-page="loadPosts"></pagination> -->
-                <div class="row justify-content-center">
+                <div class="row justify-content-center mt-3">
+                    <!-- pesquisa -->
+                    <div class="col-lg-6">
+                        <div class="list-group">
+                            <input v-model="search_post" placeholder="Pesquise..." class="list-group-item mb-1" v-on:input="getPost(search_post)">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <!-- <button class="list-group-item selecionado" href="#" v-bind:class="[isActive==0 ? activeClass : '']" v-on:click="loadPosts">
+                                Todos
+                            </button>
+                            <button class="list-group-item selecionado" href="#" v-bind:class="[isActive==category.id ? activeClass : '']" v-on:click="getCategory(category.id)" v-for="(category, index) in categories">
+                                {{ category.title }}
+                            </button> -->
+                            <select class="custom-select custom-select-lg" v-on:change="changeItem($event)">
+                                <option v-bind:value="'Todos'">Todos</option>
+                                <option v-for="(category, index) in categories" v-bind:value="category.id">{{  category.title  }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- /.pesquisa -->
                     <div class="" :class="{'loading' : loading}">
                     </div>
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="post in posts">
+                    <div class="col-lg-3 col-md-4 col-sm-12 mb-4 mt-3" v-for="post in posts">
                         <div class="card h-100">
                             <img class="card-img-top" v-bind:src="'/adminlte-laravel-8/public/storage/' + post.photo" alt="">
                             <div class="card-body">
@@ -145,7 +153,7 @@ export default {
             //Carregar imagens
             axios.get(window.location.href+'api/slides')
                 .then(response => {
-                    console.log(response.data.data[0].photos)
+                    //console.log(response.data.data[0].photos)
                     this.images = response.data.data[0].photos;
                 });
         },
@@ -154,7 +162,7 @@ export default {
                 .then((response) => {
                     this.loadmoreButton = false
                     this.isActive = category
-                    console.log(this.isActive)
+                    //console.log(this.isActive)
                     this.posts = response.data.data[0].posts
                 })
                 .catch(function (error){
@@ -162,33 +170,42 @@ export default {
                 });
         },
         getPost: function (evt){
-            console.log(evt)
-            axios.get(window.location.href+'api/post_search/' + evt)
-                .then((response) => {
-                    //console.log(response)
-                    this.isActive = -1
-                    this.posts = response.data.data
-                })
-                .catch(function (error){
-                    console.log(error)
-                });
+            //console.log(evt)
+            if(evt.target.value === ""){
+                this.loadPosts();
+            }
+            else{
+                axios.get(window.location.href+'api/post_search/' + evt)
+                    .then((response) => {
+                        //console.log(response)
+                        this.isActive = -1
+                        this.loadmoreButton = false
+                        this.posts = response.data.data
+                    })
+                    .catch(function (error){
+                        console.log(error)
+                    });
+            }
         },
         changeItem: function changeItem(event) {
             if(event.target.value == "Todos"){
                 this.loadPosts();
             }
+            else{
+
             // this.selected = "target.value: " + event.target.value;
             // console.log(this.selected);
             axios.get(window.location.href+'api/post/' + event.target.value)
                 .then((response) => {
                     this.loadmoreButton = false
                     this.isActive = event.target.value
-                    console.log(this.isActive)
+                    //console.log(this.isActive)
                     this.posts = response.data.data[0].posts
                 })
                 .catch(function (error){
                     console.log(error)
                 });
+            }
             
         },
         handleLoadMore: function () {
@@ -214,4 +231,16 @@ export default {
 </script>
 
 <style scoped>
+.carousel-item {
+    max-height: 600px !important;
+}
+.carousel-item img{
+    object-fit: cover;
+}
+.card img {
+    max-height: 200px;
+}
+.card img {
+    object-fit: cover;
+}
 </style>

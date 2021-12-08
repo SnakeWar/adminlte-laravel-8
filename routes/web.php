@@ -41,6 +41,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('posts', App\Http\Controllers\Admin\PostController::class)->middleware('can:read_posts');
     Route::post('posts/ativo/{id}', [App\Http\Controllers\Admin\PostController::class, 'ativo'])->name('posts.ativo')->middleware('can:update_posts');
+    Route::post('image-cropper/upload',[App\Http\Controllers\Admin\PostController::class, 'upload']);
 
     Route::resource('products', App\Http\Controllers\Admin\ProductController::class)->middleware('can:read_products');
     Route::post('products/ativo/{id}', [App\Http\Controllers\Admin\ProductController::class, 'ativo'])->name('products.ativo')->middleware('can:update_products');
@@ -74,5 +75,5 @@ Route::middleware('auth')->group(function () {
     Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
         ->name('ckfinder_browser');
 
-    Route::post('image-cropper/upload', [App\Http\Controllers\Admin\ImageCropperController::class, 'upload']);
+    // Route::post('image-cropper/upload', [App\Http\Controllers\Admin\ImageCropperController::class, 'upload']);
 });

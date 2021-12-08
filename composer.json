@@ -10,7 +10,6 @@
     "require": {
         "php": "^7.3|^8.0",
         "albertcht/invisible-recaptcha": "^1.9",
-        "barryvdh/laravel-debugbar": "^3.5",
         "ckfinder/ckfinder-laravel-package": "v3.5.1.6",
         "cviebrock/eloquent-sluggable": "^8.0",
         "fideloper/proxy": "^4.4",
@@ -27,6 +26,7 @@
     },
     "require-dev": {
         "beyondcode/laravel-query-detector": "^1.5",
+        "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",

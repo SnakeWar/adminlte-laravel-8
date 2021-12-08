@@ -241,7 +241,7 @@ return [
             'text' => 'Slides',
             'url'  => 'admin/slides',
             'can'  => 'read_pages',
-            'icon' => 'fa fa-fw fa-image-alt'
+            'icon' => 'fa fa-fw fa-desktop'
         ],
         [
             'text' => 'Produtos',
